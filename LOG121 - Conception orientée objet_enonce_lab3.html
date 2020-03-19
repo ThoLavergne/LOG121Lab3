@@ -1,0 +1,610 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="fr-ca">
+<HEAD>
+  <TITLE>LOG121 - Conception orient&eacute;e objet</TITLE>
+  <meta name = "viewport" content = "width = 320">
+  <link rel="stylesheet" href="core.css" media="screen"/>
+  <link rel="stylesheet" href="handheld.css"
+    media="handheld, only screen and (max-device-width:480px)"/>
+</HEAD>
+
+<body>
+<h1>Lab 3 : Patrons, patrons, patrons...</h1>
+<span class="noindent">
+<em>Derni&egrave;re mise &agrave; jour :2017-09-06
+</em>
+</span>
+<h2>But du laboratoire</h2>
+<p>Ce laboratoire vous permettra d'acqu&eacute;rir les connaissances
+suivantes :</p>
+<ul>
+  <li>Int&eacute;gration de plusieurs patrons de conception pour
+r&eacute;aliser une application simple d'affichage d'images</li>
+  <li>S&eacute;paration des classes en groupes&nbsp;: mod&egrave;le,
+vue, contr&ocirc;leur</li>
+  <li>S&eacute;rialisation d'objet en Java</li>
+</ul>
+<p>Les patrons suivants seront utilis&eacute;s (les <strong>patrons en
+gras sont obligatoires</strong>) :</p>
+<ul>
+  <li><strong>Command</strong> [GoF95]</li>
+  <li>Factory [GoF95] (optionnel)</li>
+  <li>Mediator [GoF95] (optionnel)</li>
+  <li>Memento[GoF95] ou Snapshot [Grand98] (optionnel)</li>
+  <li><strong>Observer</strong> [GoF95]</li>
+  <li><strong>Singleton</strong> [GoF95]</li>
+  <li>Strategy[GoF95] (optionnel)</li>
+</ul>
+<p>Pour ce laboratoire, vous devrez faire preuve de plus de
+cr&eacute;ativit&eacute;
+que pour les autres.
+Ne vous limitez donc pas &agrave; cette liste de patrons. Utilisez un
+patron plus
+d'une fois si c'est n&eacute;cessaire.
+Le but de ce laboratoire est de v&eacute;rifier si vous avez bien
+compris
+les patrons et leur utilisation dans une application.
+Vous devrez donc bien expliquer et justifier l'utilisation
+de chaque patron.
+</p>
+<p>Il est fortement conseill&eacute; de lire aussit&ocirc;t que
+possible la description de chacun des patrons. Votre
+compr&eacute;hension individuelle aidera grandement l'&eacute;quipe
+dans ses choix de conception qui sont la base de ce laboratoire.</p>
+<h3>Description du laboratoire :</h3>
+<p>Le laboratoire consiste &agrave; concevoir et &agrave;
+r&eacute;aliser une application qui permet d'afficher une image avec <em>plusieurs
+perspectives</em>. L'utilisateur pourra appliquer sur la perspective
+d'une image les op&eacute;rations de&nbsp;:</p>
+<ul>
+  <li>changement du facteur d'&eacute;chelle (zoom)</li>
+  <li>changement de la r&eacute;gion affich&eacute;e (translation).</li>
+</ul>
+<p>Les op&eacute;rations doivent &ecirc;tre contr&ocirc;l&eacute;es par
+la souris et <b>l'utilisateur aura toujours la possibilit&eacute; de
+d&eacute;faire (undo) l'op&eacute;ration.</b></p>
+<p>L'utilisateur pourra aussi, gr&acirc;ce &agrave; un article
+"Sauvegarder" d'un menu "Fichier", sauvegarder l'&eacute;tat (l'image
+et les perspectives actuelles) sur disque dans un fichier. Voir ce tutoriel sur <a
+ href="https://www.tutorialspoint.com/java/java_serialization.htm"
+ target="_blank">Object serialization in Java</a>. </p>
+<p>Vous allez travailler en &eacute;quipe (minimum trois personnes) et
+ces &eacute;quipes seront d&eacute;termin&eacute;es par le professeur.
+Vous devrez d&eacute;cider entre vous du r&ocirc;le de chaque
+co&eacute;quipier.</p>
+<h3><a name="TableauApplicationPatron"></a>Contraintes de
+d&eacute;veloppement :</h3>
+<p>L'implantation des diff&eacute;rents patrons doit &ecirc;tre en
+concordance avec les caract&eacute;ristiques de ces patrons. De
+l&eacute;g&egrave;res modifications devront &ecirc;tre
+justifi&eacute;es. Pour chaque patron, vous devez &ecirc;tre certain de
+son application <em>dans le contexte de votre application.</em> Donc,
+il faut &ecirc;tre capable de montrer son application dans un tableau
+ainsi&nbsp;:</p>
+<blockquote>
+  <table style="text-align: left; width: 80%;" border="1"
+ cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td class="noindent" width="56%"><strong>Nom de
+l'&eacute;l&eacute;ment du patron (classe, m&eacute;thode, etc.)</strong></td>
+        <td class="noindent" width="44%"><strong>Nom dans le laboratoire</strong></td>
+      </tr>
+      <tr>
+        <td class="noindent">Subject</td>
+        <td class="noindent">Observable</td>
+      </tr>
+      <tr>
+        <td class="noindent">attach(Observer)</td>
+        <td class="noindent">addObserver(Observer)</td>
+      </tr>
+      <tr>
+        <td class="noindent">notify()</td>
+        <td class="noindent">notifyObservers()</td>
+      </tr>
+      <tr>
+        <td class="noindent">ConcreteSubject</td>
+        <td class="noindent">Perspective<br>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">...<br>
+        </td>
+        <td style="vertical-align: top;">...<br>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+<p>Il faut s&eacute;parer des classes selon l'architecture <b>Mod&egrave;le/Vue/Contr&ocirc;leur</b>
+(MVC).</p>
+<ul>
+  <li>Les classes du mod&egrave;le doivent fournir les
+op&eacute;rations permettant d'avoir acc&egrave;s aux informations.
+Vous devez avoir au moins deux classes pour le mod&egrave;le : l'image
+et la perspective. Chaque classe du mod&egrave;le doit &ecirc;tre un <em>sujet
+distinct
+    </em>dans le patron <strong>Observer</strong>. </li>
+  <li>Pour modifier les diff&eacute;rents param&egrave;tres du
+mod&egrave;le, il faut d&eacute;finir des contr&ocirc;les qui agissent
+sur celui-ci et qui peuvent &ecirc;tre interchangeables en tout temps.</li>
+  <li>Utilisez le patron <b>Command</b> pour permettre de
+d&eacute;faire (undo) les op&eacute;rations.</li>
+</ul>
+<p>Un gestionnaire de commande doit &ecirc;tre utilis&eacute; afin de
+g&eacute;rer la m&eacute;morisation des diff&eacute;rentes commandes
+effectu&eacute;es et il doit &ecirc;tre une instance unique (patron <b>Singleton</b>).
+Ce
+gestionnaire aura la responsabilit&eacute; aussi de d&eacute;faire
+les commandes.</p>
+<p>Vous aurez besoin de plusieurs vues pour bien prouver l'utilisation
+de MVC et des patrons :</p>
+<ul>
+  <li>Une premi&egrave;re vue de l'image r&eacute;duite (vignette,
+"thumbnail");</li>
+  <li>Une seconde et une troisi&egrave;me vues changeront au gr&eacute;
+des commandes effectu&eacute;es sur chacune;</li>
+  <li>L'op&eacute;ration de d&eacute;faire une commande devrait
+s'effectuer <b>sur la bonne vue.</b></li>
+</ul>
+<h3>R&eacute;f&eacute;rences : </h3>
+<ul>
+  <li> [Grand98] <a
+ href="http://library.books24x7.com/toc.asp?bookid=5397" target="_blank">Grand,
+Mark,
+    <em>Patterns in Java,</em> 2eme &eacute;dition, J. Wiley and
+Sons , c2002</a></li>
+  <li> [GoF95] Gamma, E., Helm, R., Johnson, R &amp; Vlissides, J, <em>Design
+Patterns</em> , Addison Wesley, c1995 </li>
+</ul>
+<h3 dir="ltr">Architecture Mod&egrave;le/Vue/Contr&ocirc;leur :</h3>
+<p>L'architecture <b>Mod&egrave;le/Vue/Contr&ocirc;leur</b> (MVC) est
+une strat&eacute;gie importante en g&eacute;nie logiciel qui vise
+&agrave; s&eacute;parer les classes afin de favoriser la
+r&eacute;utilisation et l'extensibilit&eacute; d'une application. Voici
+les &eacute;l&eacute;ments de l'architecture MVC&nbsp;:</p>
+<ul>
+  <li>Le <strong>mod&egrave;le</strong> repr&eacute;sente les
+donn&eacute;es de l'application. Autrement dit, <em>c'est l'&eacute;tat</em>.
+Le
+mod&egrave;le ne conna&icirc;t rien de ses contr&ocirc;leurs ou de
+ses vues</li>
+  <li>La <strong>vue</strong> est une repr&eacute;sentation visuelle
+des donn&eacute;es, dans leur <em>&eacute;tat actuel</em>.</li>
+  <li>Le <strong>contr&ocirc;leur</strong> permet &agrave;
+l'utilisateur de modifier le mod&egrave;le. Il accepte les <em>gestes</em>
+ou les entr&eacute;es de l'utilisateur et il les traduit en changements
+du mod&egrave;le.</li>
+</ul>
+<p>La figure suivante montre la relation entre le mod&egrave;le et la
+vue. Le mod&egrave;le est repr&eacute;sent&eacute; par trois variables
+(a, b, c). Il y a trois vues (repr&eacute;sentations visuelles) qui
+montrent l'&eacute;tat actuel du mod&egrave;le. Dans cet exemple, il
+n'y a pas de contr&ocirc;leurs.</p>
+<blockquote>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td>
+        <div align="center"><img src="mvcGoF95.png" height="402"
+ width="580"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <p class="noindent" align="center"><em>Concept de
+Mod&egrave;le/Vue/Contr&ocirc;leur [GoF95] <br>
+        </em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+<p>L'exemple suivant d&eacute;montre le fonctionnement du
+contr&ocirc;leur. On suppose qu'il existe des &eacute;l&eacute;ments
+dans la <strong>vue</strong> (l'interface) tels que les boutons.
+L'usager interagit avec un &eacute;l&eacute;ment et le r&eacute;sultat
+est un &eacute;v&eacute;nement g&eacute;n&eacute;r&eacute; : l'événement "clique"
+dans la figure. Cet &eacute;v&eacute;nement est re&ccedil;u par le <strong>contr&ocirc;leur</strong>,
+
+qui
+lui, en fera la traduction en "modifiant" le <strong>mod&egrave;le</strong>.
+
+Ce
+changement ne sera pas imm&eacute;diatement refl&eacute;t&eacute;
+dans la <strong>vue</strong>, car le <strong>mod&egrave;le</strong>
+doit lui envoyer une "notification" pour qu'elle sache que le
+mod&egrave;le a &eacute;volu&eacute;. Ensuite, la vue lira les valeurs
+du mod&egrave;le afin de se mettre &agrave; jour.</p>
+<blockquote>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td>
+        <div align="center"><img src="mvcGoF95-2.gif"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <p class="noindent" align="center"><em>Un contr&ocirc;leur dans
+MVC<br>
+        </em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+<p>En r&eacute;alit&eacute;, l'architecture MVC est
+r&eacute;alis&eacute;e avec des classes logicielles. Afin de maximiser
+la r&eacute;utilisation et l'extensibilit&eacute; du logiciel, on doit
+respecter certaines r&egrave;gles de MVC&nbsp;:</p>
+<ul>
+  <li>Le <strong>mod&egrave;le</strong> ne doit pas conna&icirc;tre
+explicitement ses <strong>vues</strong> et <strong>contr&ocirc;leurs</strong>.
+
+Il
+peut les conna&icirc;tre <em>indirectement</em> comme des <em>abonn&eacute;s</em>.
+
+    <ul>
+      <li><span class="invert"><em>Ceci implique qu'il n'y a pas de
+couplage direct des classes du mod&egrave;le &agrave; ses vues.</em></span></li>
+    </ul>
+  </li>
+  <li>Chaque <strong>vue</strong> conna&icirc;t les classes de son <strong>mod&egrave;le</strong>
+ainsi que son (ses) <strong>contr&ocirc;leur</strong>(s).
+    <ul>
+      <li><span class="invert"><em>Ceci implique qu'il y a du couplage
+des vues aux classes du mod&egrave;le et &agrave; des contr&ocirc;leurs.</em></span></li>
+    </ul>
+  </li>
+  <li>Chaque <strong>contr&ocirc;leur</strong> conna&icirc;t des
+classes du <strong>mod&egrave;le</strong> sur lesquelles il agit et,
+possiblement, la <strong>vue</strong> qui peut l'invoquer.
+    <ul>
+      <li><span class="invert"><em>Ceci implique qu'il y a du couplage
+du contr&ocirc;leur aux classes du mod&egrave;le.</em></span></li>
+    </ul>
+  </li>
+</ul>
+<h3>Questions &agrave; se poser</h3>
+<p>Comment les vues et les contr&ocirc;leurs peuvent-ils s'abonner aux
+classes du mod&egrave;le&nbsp;? </p>
+<p>Comment concevoir le contr&ocirc;leur ? </p>
+<p>Certains patrons de conception, p. ex. Observer et Command,
+s'av&egrave;rent utiles pour respecter les contraintes ci-dessus. Vous
+devez bien les comprendre afin de r&eacute;ussir le laboratoire.</p>
+<blockquote>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td>
+        <div align="center"><img src="Image3.gif" height="268"
+ align="BOTTOM" border="0" width="306"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <p class="noindent" align="center"><em>Relation entre les
+&eacute;l&eacute;ments MVC</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+<h4>Diagramme de classe du patron Observer et MVC&nbsp;:</h4>
+<p><img src="MVCclasses.png" height="387" width="635">
+</p>
+<p>Diagramme adapt&eacute; de [Buschman et al., 1996]<br>
+<br>
+Note&nbsp;: Il doit y avoir plusieurs classes ind&eacute;pendantes qui
+font partie du mod&egrave;le. Par exemple, l'image et la perspective
+devraient &ecirc;tre des classes diff&eacute;rentes. </p>
+<h4>Diagramme de s&eacute;quence &agrave; la MVC&nbsp;:</h4>
+<p>Voici un diagramme de s&eacute;quence simplifi&eacute; suite au
+changement du mod&egrave;le. Vous devez impl&eacute;menter le
+mod&egrave;le avec plusieurs classes diff&eacute;rentes.<br>
+</p>
+<p><img src="MVCsequences.png" height="367" width="666"> 
+</p>
+<p>Diagramme adapt&eacute; de [Buschman et al., 1996]</p>
+<ol>
+  <li>Une vue s'abonne au mod&egrave;le pour &ecirc;tre inform&eacute;e
+de tous les changements. Cela se fait par le biais de la m&eacute;thode
+attach(Observer) du patron <strong>Observer</strong>.</li>
+  <li>Le contr&ocirc;leur re&ccedil;oit les entr&eacute;es faites par
+l&#8217;utilisateur, &agrave; travers une vue, sous forme
+d&#8217;&eacute;v&eacute;nements (p.ex. la m&eacute;thode handleEvent peut
+&ecirc;tre d&eacute;clench&eacute;e par un &eacute;v&eacute;nement de
+"click" sur une vue).<br>
+  </li>
+  <li>Le contr&ocirc;leur traduit l'&eacute;v&eacute;nement re&ccedil;u
+en demande de service au mod&egrave;le., p.ex. dans le diagramme il
+appelle la m&eacute;thode "method1" du mod&egrave;le.<br>
+  </li>
+  <li>Si l'&eacute;tat du mod&egrave;le est chang&eacute; apr&egrave;s
+l'&eacute;xecution du service demand&eacute; par le contr&ocirc;leur,
+la classe du mod&egrave;le (p. ex. celle ayant la m&eacute;thode
+"method1")
+avertit toutes les vues qui lui sont abonn&eacute;es, du changement
+avec la m&eacute;thode notify() du patron <strong>Observer</strong>.</li>
+  <ul>
+    <li>La m&eacute;thode notify() boucle sur toutes les vues
+abonn&eacute;es au mod&egrave;le et elle appelle leur m&eacute;thode
+update().<br>
+    </li>
+  </ul>
+  <li>Quand la vue est avis&eacute;e d'un changement (sa m&eacute;thode
+update() a &eacute;t&eacute; appel&eacute;e), elle doit refl&eacute;ter
+ce changement. Elle demande donc au mod&egrave;le les donn&eacute;es
+dont elle a besoin pour se mettre &agrave; jour, p. ex. avec la
+m&eacute;thode getData(). </li>
+</ol>
+<p><strong>Veuillez noter que dans le cas de ce laboratoire, la vue
+avec la vignette ne change pas, sauf lorsque l'image (la partie du
+mod&egrave;le qu'elle affiche) est chang&eacute;e. Cette vue ne recevra
+pas toutes les notifications de changements du mod&egrave;le. Ceci est
+la raison pour laquelle votre mod&egrave;le ne peut pas &ecirc;tre une
+seule classe. </strong></p>
+<h2>Rapport de laboratoire</h2>
+<p>Voir <a href="../correction.shtml">Style de correction et Rapports
+de laboratoire</a> pour plus de d&eacute;tails. </p>
+<p><strong>Dans la section "Discussion" de votre rapport, vous devriez
+expliquer et justifier l'utilisation de chaque patron, en faisant
+r&eacute;f&eacute;rence au contexte et aux cons&eacute;quences du
+patron.</strong></p>
+<p>Voir l'explication en bas pour les diagrammes UML.</p>
+<h2>Pond&eacute;ration</h2>
+<p>Le laboratoire sera not&eacute; sur 14 points. La distribution des
+points sera expliqu&eacute; par votre charg&eacute; de laboratoires et
+elle portera sur: </p>
+<ul>
+  <li>Conception, diagrammes UML</li>
+  <li>Utilisation des patrons</li>
+  <li>Bon fonctionnement</li>
+  <li>Discussion</li>
+</ul>
+<p>La partie discussion peut porter, par exemple, sur la justification
+de l'utilisation &eacute;ventuelle de variantes des patrons, sur la
+justification de l'utilisation &eacute;ventuelle de classes internes
+(inner class) ou sur la justification de la visibilit&eacute; des
+diff&eacute;rentes variables, m&eacute;thodes et classes</p>
+<h2>Points boni</h2>
+<p>Plusieurs options s'offrent &agrave; ceux qui voudraient aller un
+peu plus loin. Il est fortement recommand&eacute; de s'attaquer aux
+demandes minimales du laboratoire avant d'en faire plus. Vous pouvez
+gagner jusqu'&agrave; 20&nbsp;% de plus pour les fonctionnalit&eacute;s
+additionnelles, <strong>&agrave; condition d'avoir satisfait des
+demandes minimales du laboratoire</strong>. </p>
+<p>L'application des patrons permet l'int&eacute;gration de nouvelles
+fonctions
+sans modifier toute l'architecture du programme. Voici quelques
+suggestions :</p>
+<h3>Fonction Refaire<br>
+</h3>
+<p>Pour refaire une op&eacute;ration annulée, vous pouvez
+m&eacute;moriser l'&eacute;tat du mod&egrave;le avant d'effectuer
+l'op&eacute;ration avec le patron <b>Memento</b> ou <b>Snapshot</b>.
+</p>
+<h3>Fonction Copier-Coller</h3>
+<p>Ceci permet de copier certains param&egrave;tres d'un mod&egrave;le
+d'une image et de les appliquer (coller) &agrave; une autre image. Il
+ne s'agit pas de copier l'image, mais plut&ocirc;t les
+param&egrave;tres d'affichage comme&nbsp;:</p>
+<ul>
+  <li>le facteur d'&eacute;chelle seulement</li>
+  <li>la translation seulement</li>
+  <li>les deux</li>
+  <li>rien</li>
+</ul>
+<p>Le patron <b>Strategy</b> permet de d&eacute;terminer la
+strat&eacute;gie &agrave; adopter lorsque "copier" est effectu&eacute;.
+<!--
+
+
+  Pour ne rien copier,
+
+
+     il est pr&eacute;f&eacute;rable d'utiliser le patron <b>Null Object</b>.
+
+
+     --></p>
+<p>L'int&eacute;gration de cette op&eacute;ration s'effectue en
+utilisant le patron <b>Mediator</b> qui permet de faire la gestion
+entre le moment o&ugrave; la copie est faite et le moment du collage et
+aussi de g&eacute;rer la possibilit&eacute; de faire plusieurs fois la
+fonction Copier et de ne coller que les param&egrave;tres de la
+derni&egrave;re copie.</p>
+
+
+<h2>Date de remise et pr&eacute;sentation</h2>
+<p>Voir le site de chaque groupe pour la date de remise.</p>
+<p>Vous devez respecter la proc&eacute;dure de remise des travaux.</p>
+
+<blockquote>
+  <h4>A) Revue de conception </h4>
+
+  <p style="margin-top: 0pt; margin-bottom: 0pt;" dir="ltr">Les <b>diagrammes
+UML
+  </b>doivent &ecirc;tre remis apr&egrave;s le d&eacute;roulement de
+la moiti&eacute; de l'activit&eacute;. <strong>Cette &eacute;tape
+n'est pas facultative! </strong>V&eacute;rifiez cette date avec votre
+professeur/charg&eacute; de laboratoire. <strong>Si vous n'avez pas eu
+une revue de votre conception, la note de ce laboratoire sera 0.</strong></p>
+  <p dir="ltr">Les diagrammes requis sont :</p>
+  <ul>
+    <li>Diagramme(s) de classes de toutes les classes de votre
+application.</li>
+    <li>Diagrammes de s&eacute;quence d&eacute;montrant visuellement le
+flot entre le(s) contr&ocirc;leur(s), les classes du mod&egrave;le et
+la (les) vue(s) :
+      <ol>
+        <li>Effectuer une certaine commande</li>
+        <li>D&eacute;faire une certaine commande</li>
+      </ol>
+    </li>
+    <li>Tableaux d'application du patron (<a
+ href="#TableauApplicationPatron">voir ci-haut</a>) pour chaque patron
+appliqu&eacute;</li>
+  </ul>
+  <p>Afin d'avoir suffisamment de temps pour coder, vous pourrez
+conserver votre design original pour l'impl&eacute;mentation (mais
+introduisez une section dans le rapport o&ugrave; vous discuterez des
+lacunes de votre impl&eacute;mentation, des am&eacute;liorations que
+vous devriez lui apporter et des raisons pour lesquelles ces
+am&eacute;liorations seraient n&eacute;cessaires). </p>
+  <p>Vous pouvez pr&eacute;senter, expliquer et discuter un design
+am&eacute;lior&eacute; m&ecirc;me s'il n'est pas
+impl&eacute;ment&eacute;. Ce design &eacute;tendu peut &eacute;galement
+couvrir les points boni. Dans le rapport, regroupez ces
+am&eacute;liorations non impl&eacute;ment&eacute;es dans une section
+bien identifi&eacute;e. </p>
+  <p>Ces diagrammes pourront <b>l&eacute;g&egrave;rement</b>
+&ecirc;tre modifi&eacute;s pour la remise du rapport final.</p>
+  <h4>B) &Eacute;valuation finale </h4>
+
+  <p>La derni&egrave;re s&eacute;ance de laboratoire sera une
+&eacute;valuation fonctionnelle de votre laboratoire, tout comme les
+&eacute;valuations des autres laboratoires. <strong>Tous les membres
+de l'&eacute;quipe doivent &ecirc;tre pr&eacute;sents, sinon la note de
+ce laboratoire sera 0.</strong></p>
+</blockquote>
+
+<h2>Documents, fichiers et indices utiles</h2>
+<p>Vous n'&ecirc;tes pas oblig&eacute;s de r&eacute;utiliser le code
+des autres laboratoires. Par contre, si vous le faites, il faut, bien
+s&ucirc;r, citer la r&eacute;f&eacute;rence.</p>
+<p>La partie conception de ce laboratoire est primordiale. Mettez assez
+de ressources (toute l'&eacute;quipe) l&agrave;-dessus le plus
+t&ocirc;t possible. Une bonne conception vous &eacute;pargnera du temps
+plus tard.</p>
+<p>N'h&eacute;sitez pas &agrave; consulter les sites Web sur les
+patrons. Votre compr&eacute;hension individuelle des patrons
+utilis&eacute;s d&eacute;finira en grande partie la qualit&eacute; de
+vos discussions, de vos choix et, ultimement, de votre laboratoire.</p>
+
+<h2>Foire aux questions (FAQ)</h2>
+
+<ol>
+  <li>La translation s'effectue-t-elle &agrave; l'aide de la souris ou
+&agrave; l'aide d'un menu ?
+    <p><em>La souris principalement, mais un menu est aussi pratique.
+Si vous avez bien appliqu&eacute; le patron Command, &ccedil;a sera
+facile de faire les deux. Pour le menu, les arguments de la translation
+doivent passer par un dialogue. Pour la souris, il faut les obtenir
+&agrave; partir du geste. Mais, cela devrait &ecirc;tre la m&ecirc;me
+op&eacute;ration qui modifie la perspective quelle que soit la source
+des arguments. </em></p>
+  </li>
+  <li>&Agrave; quoi sert la sauvegarde ?
+    <p><em>On sauvegarde afin de pouvoir r&eacute;cup&eacute;rer plus
+tard la perspective sur une image. Si on avait une image &eacute;norme
+(image satellite, image m&eacute;dicale) avec une tr&egrave;s haute
+r&eacute;solution, &ccedil;a serait utile de pouvoir sauvegarder des
+perspectives. On sauvegarde aussi pour apprendre &agrave; utiliser la
+s&eacute;rialisation d'objet pour la persistance, quelque chose qui est
+souvent utile dans les applications. </em></p>
+  </li>
+  <li>J'ai des probl&egrave;mes avec les mises &agrave; jour dans
+l'interface. Par exemple, lorsque j'effectue une translation, l'image
+vignette (thumbnail) scintille. Comment &eacute;viter que toutes les
+parties de mes vues soient mises &agrave; jour pour toutes les actions?
+    <p><em>Il peut y avoir plusieurs raisons pour ce probl&egrave;me.
+Voici une explication possible, si vous avez une seule classe
+"Mod&egrave;le" contenant des r&eacute;f&eacute;rences aux objets
+concrets, par exemple, les images, les perspectives, etc. </em></p>
+    <p><em>Id&eacute;alement, vous devriez faire en sorte que chaque
+objet concret (image, perspective, etc.) soit un sujet <strong>ind&eacute;pendant</strong>
+dans le patron Observateur. Autrement dit, l'objet de la classe
+"Mod&egrave;le" ne doit pas &ecirc;tre le seul sujet (ou un sujet du
+tout!) dans le patron Observateur. Bien qu'il soit plus simple
+d'impl&eacute;menter le patron Observateur de cette fa&ccedil;on, cette
+conception n'est pas id&eacute;ale, car chaque modification du
+mod&egrave;le n&eacute;cessite une mise &agrave; jour de toutes les
+vues. Par exemple, une op&eacute;ration de translation n'affecte qu'une
+partie du mod&egrave;le (une perspective), elle ne devrait jamais
+affecter l'objet repr&eacute;sentant l'image et donc il est inutile
+d'afficher de nouveau la vignette &agrave; la suite d'une translation. </em></p>
+    <p><em>Si vous n'avez qu'une classe Mod&egrave;le qui est le seul
+sujet du patron Observateur, alors quelle que soit la modification du
+mod&egrave;le, tous les observateurs vont essayer de se mettre &agrave;
+jour. Donc, v</em><em>ous devriez plut&ocirc;t d&eacute;composer le
+mod&egrave;le, ainsi que la (les) vue(s), en plusieurs classes, chacune
+&eacute;tant un sujet ou un observateur respectivement. Par exemple,
+l'&eacute;l&eacute;ment dans la vue qui affiche la vignette de l'image
+devrait s'abonner (attach(Observer)) seulement au sujet
+repr&eacute;sentant l'image dans le mod&egrave;le et non pas au sujet
+repr&eacute;sentant une perspective.</em></p>
+    <p><em>Une mauvaise solution &agrave; ce probl&egrave;me est de
+faire une m&eacute;thode sp&eacute;cialis&eacute;e dans le patron
+Observateur de ce genre&nbsp;: "notifyTranslation()" avec l'intention
+d'avoir une notification pour chaque op&eacute;ration affectant le
+mod&egrave;le. Pourquoi est-ce mauvais&nbsp;? Parce que votre
+mod&egrave;le doit ainsi conna&icirc;tre ces m&eacute;thodes "notify"
+sp&eacute;cialis&eacute;es de la vue. Donc, il d&eacute;pend de la vue!
+Cela ne respecte plus le principe MVC car le mod&egrave;le est
+cens&eacute; ignorer les d&eacute;tails de ses contr&ocirc;leurs et de
+ses vues. </em></p>
+    <p><em>Finalement, le fait de d&eacute;composer le mod&egrave;le en
+plusieurs sujets ayant leurs propres abonn&eacute;s ind&eacute;pendants
+dans la vue est la solution fonctionnellement &eacute;quivalente
+&agrave; un notifyX() sp&eacute;cialis&eacute;. Pourtant, il est plus
+propre en termes du patron Observateur puisque chaque observateur
+s'abonne seulement &agrave; la partie du mod&egrave;le qui lui
+int&eacute;resse. </em></p>
+  </li>
+  <li>Pourquoi la perspective est-elle dans le mod&egrave;le et non
+dans la vue ?
+    <p><em>Voir la r&eacute;ponse &agrave; 2. &Ccedil;a fait partie de
+l'&eacute;tat de l'application == &eacute;tat persistant ==
+mod&egrave;le.</em></p>
+  </li>
+  <li> A-t-on plusieurs mod&egrave;les avec une vue pour chacun ?
+    <p><em>Si tu consid&egrave;res les perspectives comme faisant
+partie du mod&egrave;le (plut&ocirc;t que parler de plusieurs
+mod&egrave;les), il peut y avoir plusieurs perspectives. Aussi, rien
+n'emp&ecirc;che d'ouvrir plusieurs images dans l'application, chacune
+avec une ou des perspectives. Une bonne conception OO permettra
+facilement ces fonctionnalit&eacute;s.</em></p>
+  </li>
+  <li>Les images peuvent-elles &ecirc;tre modifi&eacute;es lors de
+l'ex&eacute;cution ?
+    <p><em>En th&eacute;orie, oui, mais il n'est pas
+sp&eacute;cifi&eacute; pr&eacute;cis&eacute;ment dans
+l'&eacute;nonc&eacute; (voir la question suivante). L'application d'un
+filtre &agrave; une image (&agrave; la Photoshop) serait un bon exemple
+d'une modification de l'image.</em></p>
+  </li>
+  <li>A-t-on un chemin d'acc&egrave;s sur l'image dans notre
+mod&egrave;le ?
+    <p><em>Si tu veux dire plut&ocirc;t, "Doit-on pouvoir
+sp&eacute;cifier le fichier &agrave; charger pour l'application" alors
+la r&eacute;ponse est "oui" dans la solution id&eacute;ale. <strong>Tu
+peux consid&eacute;rer &ccedil;a comme une exigence.</strong></em></p>
+  </li>
+  <li>Pourquoi la totalit&eacute; des exigences n'est-elle pas
+sp&eacute;cifi&eacute;e par l'&eacute;nonc&eacute;&nbsp;?
+    <p><em>Dans la r&eacute;alit&eacute;, qui va sp&eacute;cifier
+toutes les exigences ? Il est presque impossible de les conna&icirc;tre
+toutes, a priori. Les exigences sont parfois tr&egrave;s floues au
+d&eacute;but d'un projet. L'ing&eacute;nieur en logiciel doit accepter
+ce fait et faire de son mieux pour am&eacute;liorer la situation. Vous
+avez plus de responsabilit&eacute;s dans ce laboratoire &agrave;
+d&eacute;couvrir les d&eacute;tails que dans les laboratoires
+pr&eacute;c&eacute;dents. </em></p>
+  </li>
+  <li>Pourquoi les liens sur les technologies &agrave; utiliser dans le
+laboratoire ne sont-ils pas sur la page de l'&eacute;nonc&eacute; ?
+    <p><em> Il y a deux raisons: (1) M&ecirc;me si on pouvait donner
+toutes les r&eacute;ponses pour les technologies de pointe, les
+technologies &eacute;voluent tellement vite que &ccedil;a risque de ne
+plus &ecirc;tre valable dans une ann&eacute;e ou deux. (2) On aurait pu
+vous donner des liens. On aurait pu vous donner le code source pour la
+solution du laboratoire aussi&nbsp;! Le but est de vous apprendre
+plut&ocirc;t &agrave; utiliser les ressources (Java Tutorial, API,
+livres sur les patrons, Google) pour trouver les r&eacute;ponses
+&agrave; vos questions.</em></p>
+  </li>
+</ol>
+
+</body>
+</html>

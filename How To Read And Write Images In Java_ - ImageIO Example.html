@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="template" content="Genbu 1.3.0" />
+<!-- This site is optimized with the Yoast SEO plugin v13.0 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>How To Read And Write Images In Java? - ImageIO Example</title>
+<meta name="description" content="Java program to read and write images using ImageIO class in various formats like JPG, GIF, PNG, BMP, how to read and write images in java example program"/>
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+<link rel="canonical" href="https://javaconceptoftheday.com/read-and-write-images-in-java/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How To Read And Write Images In Java? - ImageIO Example" />
+<meta property="og:description" content="Java program to read and write images using ImageIO class in various formats like JPG, GIF, PNG, BMP, how to read and write images in java example program" />
+<meta property="og:url" content="https://javaconceptoftheday.com/read-and-write-images-in-java/" />
+<meta property="og:site_name" content="Java Concept Of The Day" />
+<meta property="article:section" content="File Handling" />
+<meta property="article:published_time" content="2016-11-24T03:37:42+00:00" />
+<meta property="article:modified_time" content="2016-11-24T03:39:41+00:00" />
+<meta property="og:updated_time" content="2016-11-24T03:39:41+00:00" />
+<script type='application/ld+json' class='yoast-schema-graph yoast-schema-graph--main'>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://javaconceptoftheday.com/#website","url":"https://javaconceptoftheday.com/","name":"Java Concept Of The Day","description":"Java Tutorial Site For Beginners","potentialAction":{"@type":"SearchAction","target":"https://javaconceptoftheday.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://javaconceptoftheday.com/read-and-write-images-in-java/#webpage","url":"https://javaconceptoftheday.com/read-and-write-images-in-java/","inLanguage":"en-US","name":"How To Read And Write Images In Java? - ImageIO Example","isPartOf":{"@id":"https://javaconceptoftheday.com/#website"},"datePublished":"2016-11-24T03:37:42+00:00","dateModified":"2016-11-24T03:39:41+00:00","author":{"@id":"https://javaconceptoftheday.com/#/schema/person/d191a5ab459f6c2350e925d7206be3fa"},"description":"Java program to read and write images using ImageIO class in various formats like JPG, GIF, PNG, BMP, how to read and write images in java example program"},{"@type":["Person"],"@id":"https://javaconceptoftheday.com/#/schema/person/d191a5ab459f6c2350e925d7206be3fa","name":"pramodbablad","sameAs":[]}]}</script>
+<!-- / Yoast SEO plugin. -->
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Java Concept Of The Day &raquo; Feed" href="https://javaconceptoftheday.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Java Concept Of The Day &raquo; Comments Feed" href="https://javaconceptoftheday.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Java Concept Of The Day &raquo; How To Read And Write Images In Java? &#8211; ImageIO Example Comments Feed" href="https://javaconceptoftheday.com/read-and-write-images-in-java/feed/" />
+<link rel="pingback" href="https://javaconceptoftheday.com/xmlrpc.php" />
+<link rel='stylesheet' id='theme-open-sans-font-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A400%2C300%2C300italic%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic&#038;ver=1.3.0' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='https://c0.wp.com/c/5.3.2/wp-includes/css/dashicons.min.css' type='text/css' media='all' />
+<!-- <link rel='stylesheet' id='style-css'  href='https://javaconceptoftheday.com/wp-content/themes/genbu/style.min.css?ver=1.3.0' type='text/css' media='all' /> -->
+<link rel="stylesheet" type="text/css" href="//javaconceptoftheday.com/wp-content/cache/wpfc-minified/2b0hajiu/fnsme.css" media="all"/>
+<link rel='stylesheet' id='wp-block-library-css'  href='https://c0.wp.com/c/5.3.2/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='jetpack_css-css'  href='https://c0.wp.com/p/jetpack/8.2/css/jetpack.css' type='text/css' media='all' />
+<script>if (document.location.protocol != "https:") {document.location = document.URL.replace(/^http:/i, "https:");}</script><script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/jquery/jquery-migrate.min.js'></script>
+<link rel='https://api.w.org/' href='https://javaconceptoftheday.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://javaconceptoftheday.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://javaconceptoftheday.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://javaconceptoftheday.com/?p=3581' />
+<link rel="alternate" type="application/json+oembed" href="https://javaconceptoftheday.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjavaconceptoftheday.com%2Fread-and-write-images-in-java%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://javaconceptoftheday.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjavaconceptoftheday.com%2Fread-and-write-images-in-java%2F&#038;format=xml" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" href="https://javaconceptoftheday.com/wp-content/uploads/2014/11/Javafevicon.png" type="image/x-icon" />
+<link rel="shortcut icon" href="https://javaconceptoftheday.com/wp-content/uploads/2014/11/Javafevicon.png" type="image/x-icon" />
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-50578802-1', 'javaconceptoftheday.com');
+ga('send', 'pageview');
+</script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- Media.Net Head tag -->
+<script type="text/javascript">
+window._mNHandle = window._mNHandle || {};
+window._mNHandle.queue = window._mNHandle.queue || [];
+medianet_versionId = "3121199";
+</script>
+<script src="//contextual.media.net/dmedianet.js?cid=8CUFH87TV" async="async"></script>
+<!-- Media.Net Head tag --><script type="text/javascript">
+(function(url){
+if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+var addEvent = function(evt, handler) {
+if (window.addEventListener) {
+document.addEventListener(evt, handler, false);
+} else if (window.attachEvent) {
+document.attachEvent('on' + evt, handler);
+}
+};
+var removeEvent = function(evt, handler) {
+if (window.removeEventListener) {
+document.removeEventListener(evt, handler, false);
+} else if (window.detachEvent) {
+document.detachEvent('on' + evt, handler);
+}
+};
+var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+var logHuman = function() {
+if (window.wfLogHumanRan) { return; }
+window.wfLogHumanRan = true;
+var wfscr = document.createElement('script');
+wfscr.type = 'text/javascript';
+wfscr.async = true;
+wfscr.src = url + '&r=' + Math.random();
+(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+for (var i = 0; i < evts.length; i++) {
+removeEvent(evts[i], logHuman);
+}
+};
+for (var i = 0; i < evts.length; i++) {
+addEvent(evts[i], logHuman);
+}
+})('//javaconceptoftheday.com/?wordfence_lh=1&hid=9BE8FA819FF1DCCA5A8E9BF274B56E33');
+</script>
+<link rel='dns-prefetch' href='//c0.wp.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style>
+<style type="text/css" id="custom-header-css">.custom-header #site-title a,.custom-header #site-title a:hover{color:#444444;}</style>
+<style type="text/css">
+/* If html does not have either class, do not show lazy loaded images. */
+html:not( .jetpack-lazy-images-js-enabled ):not( .js ) .jetpack-lazy-image {
+display: none;
+}
+</style>
+<script>
+document.documentElement.classList.add(
+'jetpack-lazy-images-js-enabled'
+);
+</script>
+</head>
+<body data-rsssl=1 class="wordpress ltr en en-us parent-theme y2020 m02 d12 h15 wednesday logged-out custom-background custom-header display-header-text singular singular-post singular-post-3581 post-format-standard no-js sidebar-primary-active sidebar-secondary-active menu-primary-active menu-footer-active wp-is-not-mobile custom-header-no-image custom-header-text custom-header-text-color layout-sidebar2-content-sidebar1" dir="ltr" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<script type="text/javascript">document.body.className = document.body.className.replace('no-js','js');</script> 
+<div id="container">
+<div class="skip-link">
+<a class="screen-reader-text" href="#content">Skip to content</a>
+</div>
+<header id="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+<div id="branding">
+<h1 id="site-title" itemprop="headline"><a href="https://javaconceptoftheday.com" rel="home">Java Concept Of The Day</a></h1>			<h2 id="site-description" itemprop="description">Java Tutorial Site For Beginners</h2>
+</div><!-- #branding -->
+</header><!-- #header-->
+<nav id="menu-primary" class="menu" role="navigation" aria-label="Navigation Menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+<div class="menu-container menu-dropdown menu-search">
+<div id="menu-toggle-primary" class="menu-toggle">
+<a class="menu-toggle-open" href="#menu-primary"><span class="screen-reader-text">MainMenu</span></a>
+<a class="menu-toggle-close" href="#menu-toggle-primary"><span class="screen-reader-text">MainMenu</span></a>
+</div><!-- .menu-toggle -->
+<div class="wrap"><ul id="menu-primary-items" class="menu-items"><li id="menu-item-2075" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-2075"><a href="https://javaconceptoftheday.com/">Home</a></li>
+<li id="menu-item-3528" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3528"><a href="https://javaconceptoftheday.com/arrays-in-java/">Arrays</a></li>
+<li id="menu-item-3530" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3530"><a href="https://javaconceptoftheday.com/introduction-strings/">Strings</a></li>
+<li id="menu-item-3527" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3527"><a href="https://javaconceptoftheday.com/exception-handling-java/">Exception Handling</a></li>
+<li id="menu-item-3529" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3529"><a href="https://javaconceptoftheday.com/threads-in-java/">Threads</a></li>
+<li id="menu-item-3531" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3531"><a href="https://javaconceptoftheday.com/why-we-need-generics-in-java/">Generics</a></li>
+<li id="menu-item-3532" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3532"><a href="https://javaconceptoftheday.com/collection-framework-class-hierarchy/">Collections</a></li>
+<li id="menu-item-3533" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3533"><a href="https://javaconceptoftheday.com/java-jdbc-tutorial/">JDBC</a></li>
+<li id="menu-item-3054" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3054"><a href="https://javaconceptoftheday.com/most-asked-java-interview-programs-with-solutions/">Interview Programs</a></li>
+</ul></div>
+<form role="search" method="get" class="search-form" action="https://javaconceptoftheday.com/">
+<a href="#search-menu" class="search-toggle"><span class="screen-reader-text">Expand Search Form</span></a>
+<input id="search-menu" type="search" class="search-field" placeholder="Search&hellip;" value="" name="s"/>
+<button class="search-submit button"><span class="screen-reader-text">Search</span></button>
+</form>
+</div><!-- .menu-container -->
+</nav><!-- #menu-primary -->
+<div id="main">
+<div class="main-inner">
+<div class="main-wrap">
+<main id="content" class="content" role="main" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/Blog">
+<div class="content-entry-wrap">
+<article id="post-3581" class="entry post publish author-pramodbablad post-3581 format-standard category-file-handling category-java-interview-programs" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+<div class="entry-wrap">
+<header class="entry-header">
+<h1 class="entry-title" itemprop="headline"><a href="https://javaconceptoftheday.com/read-and-write-images-in-java/" rel="bookmark" itemprop="url">How To Read And Write Images In Java? &#8211; ImageIO Example</a></h1>
+<div class="entry-byline">
+<span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><a href="https://javaconceptoftheday.com/author/pramodbablad/" title="Posts by pramodbablad" rel="author" class="url fn n" itemprop="url"><span itemprop="name">pramodbablad</span></a></span>
+<time class="entry-published updated" datetime="2016-11-24T03:37:42+05:30" title="Thursday, November 24, 2016, 3:37 am">November 24, 2016</time>
+<a href="https://javaconceptoftheday.com/read-and-write-images-in-java/#respond" class="comments-link" itemprop="discussionURL">0</a>			</div><!-- .entry-byline -->
+</header><!-- .entry-header -->
+<div class="entry-content" itemprop="articleBody">
+<hr />
+<h3>Problem :</h3>
+<p>Write a java program to read and write images. Your program should read an image file either from local disk or from any URL and write the same image in the various formats like JPG, GIF, PNG, BMP into the local disc.</p><div class='code-block code-block-1' style='margin: 8px auto; text-align: center; display: block; clear: both;'>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ResponsiveAd -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5824197117376292"
+data-ad-slot="6533287962"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<h3>How To Read And Write Images In Java?</h3>
+<p>To read and write image files either from local disk or from URL, <em>javax.imageio.ImageIO</em> class is used. <em>javax.imageio.ImageIO</em> is a final class with some static methods which are very useful for image processing. Let&#8217;s see how to read and write images in java using <em>javax.imageio.ImageIO</em> class.</p>
+<p>Step 1 : Create <em>java.io.File</em> object or <em>java.net.URL</em> object depending upon from where you want to read an image.</p>
+<p style="padding-left: 60px;"><em>File file = new File(&#8220;Pass the image file location here&#8221;)</em></p>
+<p style="padding-left: 60px;"><em>URL url = new URL(&#8220;Pass the URL of image file here&#8221;)</em></p>
+<p>Step 2 : Read the image using <em>ImageIO.read()</em> method into <em>BufferedImage</em> object.</p>
+<p style="padding-left: 60px;"><em>BufferedImage image = ImageIO.read(file or url)</em></p>
+<p>Step 3 : Write the image into local disc using <em>ImageIO.write()</em> method by passing the desired format.</p><div class='code-block code-block-3' style='margin: 8px auto; text-align: center; display: block; clear: both;'>
+<script id="mNCC" language="javascript">
+medianet_width = "300";
+medianet_height = "250";
+medianet_crid = "579021405";
+medianet_versionId = "111299";
+(function() {
+var isSSL = 'https:' == document.location.protocol;
+var mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=8CUFH87TV' + (isSSL ? '&https=1' : '');
+document.write('<scr' + 'ipt type="text/javascript" id="mNSC" src="' + mnSrc + '"></scr' + 'ipt>');
+})();
+</script></div>
+<p style="padding-left: 60px;"><em>ImageIO.write(image, &#8220;Pass the format here&#8221;, new File(&#8220;Location of output file&#8221;))</em></p>
+<h3>Java Program To Read And Write Image From Local Disc :</h3>
+<pre class="brush: java; title: ; notranslate" title="">
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+public class ReadAndWriteImage
+{	
+	public static void main(String[] args)
+	{	
+		File file = new File(&quot;I:/input.jpg&quot;);
+		
+		BufferedImage image = null;
+		
+		try 
+		{
+			image = ImageIO.read(file);
+			
+			ImageIO.write(image, &quot;jpg&quot;, new File(&quot;I:/output.jpg&quot;));
+			
+			ImageIO.write(image, &quot;png&quot;, new File(&quot;I:/output.png&quot;));
+			
+			ImageIO.write(image, &quot;gif&quot;, new File(&quot;I:/output.gif&quot;));
+			
+			ImageIO.write(image, &quot;bmp&quot;, new File(&quot;I:/output.bmp&quot;));
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		System.out.println(&quot;done&quot;);
+	}
+}
+</pre>
+<h3>Java Program To Read And Write Image From URL :</h3>
+<pre class="brush: java; title: ; notranslate" title="">
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+
+public class ReadAndWriteImage
+{	
+	public static void main(String[] args)
+	{	
+		URL url = null;
+		
+		BufferedImage image = null;
+		
+		try 
+		{
+			url = new URL(&quot;https://javaconceptoftheday.com/wp-content/NumberPatternPrograms.png&quot;);
+		} 
+		catch (MalformedURLException e1) 
+		{
+			e1.printStackTrace();
+		}
+		
+		try 
+		{
+			image = ImageIO.read(url);
+			
+			ImageIO.write(image, &quot;jpg&quot;, new File(&quot;I:/output.jpg&quot;));
+			
+			ImageIO.write(image, &quot;png&quot;, new File(&quot;I:/output.png&quot;));
+			
+			ImageIO.write(image, &quot;gif&quot;, new File(&quot;I:/output.gif&quot;));
+			
+			ImageIO.write(image, &quot;bmp&quot;, new File(&quot;I:/output.bmp&quot;));
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		System.out.println(&quot;done&quot;);
+	}
+}
+</pre>
+<p><strong>Also Read :</strong></p>
+<p style="padding-left: 30px;"><a href="https://javaconceptoftheday.com/compare-two-text-files-in-java/" target="_blank">How to compare two text files in java?</a></p>
+<p style="padding-left: 30px;"><a href="https://javaconceptoftheday.com/set-file-permissions-in-java/" target="_blank">How to set file permissions in java?</a></p>
+<p style="padding-left: 30px;"><a href="https://javaconceptoftheday.com/how-to-sort-a-text-file-in-java/" target="_blank">How to sort text file in java?</a></p>
+<p style="padding-left: 30px;"><a href="https://javaconceptoftheday.com/find-most-repeated-word-in-text-file-in-java/" target="_blank">How to find the most repeated word in a text file?</a></p>
+<hr />
+<div class='code-block code-block-4' style='margin: 8px auto; text-align: center; display: block; clear: both;'>
+<div id="392514484">
+<script type="text/javascript">
+try {
+window._mNHandle.queue.push(function (){
+window._mNDetails.loadTag("392514484", "728x90", "392514484");
+});
+}
+catch (error) {}
+</script>
+</div></div>
+<div class='code-block code-block-5' style='margin: 8px auto; text-align: center; display: block; clear: both;'>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-format="autorelaxed"
+data-ad-client="ca-pub-5824197117376292"
+data-ad-slot="4782163672"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+</div><!-- .entry-content -->
+<footer class="entry-footer">
+<div class="entry-meta">
+<span class="entry-terms category" itemprop="articleSection"><span class="term-name">Categories</span> <a href="https://javaconceptoftheday.com/category/file-handling/" rel="tag">File Handling</a>, <a href="https://javaconceptoftheday.com/category/java-interview-programs/" rel="tag">Java Interview Programs</a></span>														</div>
+</footer><!-- .entry-footer -->
+</div><!-- .entry-wrap -->
+</article><!-- .entry -->
+<div class="loop-nav">
+<div class="prev"><span class="screen-reader-text">Previous:</span> <a href="https://javaconceptoftheday.com/compare-two-text-files-in-java/" rel="prev">How To Compare Two Text Files In Java?</a></div>	<div class="next"><span class="screen-reader-text">Next:</span> <a href="https://javaconceptoftheday.com/find-union-and-intersection-of-multiple-arrays-in-java/" rel="next">How To Find Union And Intersection Of Multiple Arrays In Java?</a></div></div><!-- .loop-nav -->
+<section id="comments-template" class="comments-section">
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/read-and-write-images-in-java/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://javaconceptoftheday.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='3581' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+</section><!-- #comments-template -->								
+</div><!-- .content-entry-wrap-->
+</main><!-- #content -->
+<div id="sidebar-primary-wrap">
+<aside id="sidebar-primary" class="sidebar" role="complementary" aria-label="Sidebar 1 Sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+<section id="custom_html-2" class="widget_text widget widget-1 widget-first widget_custom_html"><div class="textwidget custom-html-widget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- AdUnit4 -->
+<ins class="adsbygoogle"
+style="display:inline-block;width:300px;height:600px"
+data-ad-client="ca-pub-5824197117376292"
+data-ad-slot="3201073961"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="blog_subscription-2" class="widget widget-2 widget_blog_subscription jetpack_subscription_widget"><h3 class="widget-title">Subscribe To Our Latest Updates</h3>
+<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2">
+<p>Join 11,916 other subscribers</p>
+<p id="subscribe-email">
+<label id="jetpack-subscribe-label"
+class="screen-reader-text"
+for="subscribe-field-blog_subscription-2">
+Email Address                        </label>
+<input type="email" name="email" required="required" class="required"
+value=""
+id="subscribe-field-blog_subscription-2"
+placeholder="Email Address"/>
+</p>
+<p id="subscribe-submit">
+<input type="hidden" name="action" value="subscribe"/>
+<input type="hidden" name="source" value="https://javaconceptoftheday.com/read-and-write-images-in-java/"/>
+<input type="hidden" name="sub-type" value="widget"/>
+<input type="hidden" name="redirect_fragment" value="blog_subscription-2"/>
+<button type="submit"
+name="jetpack_subscriptions_widget"
+>
+Subscribe                        </button>
+</p>
+</form>
+</section><section id="custom_html-8" class="widget_text widget widget-3 widget_custom_html"><h3 class="widget-title">Java 8 Tutorials</h3><div class="textwidget custom-html-widget"><a href="https://javaconceptoftheday.com/java-8-lambda-expressions/">Java 8 Lambda Expressions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-8-functional-interfaces/">Java 8 Functional Interfaces</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-8-method-references/">Java 8 Method References</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-8-interface-changes-default-methods-and-static-methods/">Java 8 Interface Changes</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-8-streams-beginners-guide/">Java 8 Streams</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-8-collectors-tutorial/">Java 8 Collectors</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/interface-vs-abstract-class-after-java-8/">Interface Vs Abstract Class After Java 8</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/collections-and-streams-in-java/">Collections Vs Streams</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/">Solving Real Time Queries Using Java 8 - Employee Management System</a></div></section><section id="custom_html-9" class="widget_text widget widget-4 widget_custom_html"><div class="textwidget custom-html-widget"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- AdUnit_300x250 -->
+<ins class="adsbygoogle"
+style="display:inline-block;width:300px;height:250px"
+data-ad-client="ca-pub-5824197117376292"
+data-ad-slot="7844910764"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-7" class="widget_text widget widget-5 widget_custom_html"><h3 class="widget-title">Java Interview Questions</h3><div class="textwidget custom-html-widget"><a href="https://javaconceptoftheday.com/java-exception-handling-interview-questions-and-answers/">Exception Handling Interview Questions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-string-interview-questions-and-answers/">Strings Interview Questions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-array-interview-questions-and-answers/">Array Interview Questions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/top-25-simple-basic-java-interview-questions-for-freshers/">25 Fresher's Basic Java Interview Questions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/15-simple-but-confusing-java-interview-questions/">15 Simple But Confusing Java Interview Questions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-inheritance/">Inheritance Interview Questions</a><hr style="margin-top:5px;margin-bottom:5px" />
+<a href="https://javaconceptoftheday.com/tricky-core-java-interview-coding-questions/">Tricky Java Interview Questions</a></div></section>		<section id="recent-posts-2" class="widget widget-6 widget_recent_entries">		<h3 class="widget-title">Recent Posts :</h3>		<ul>
+<li>
+<a href="https://javaconceptoftheday.com/print-all-substrings-of-a-string-in-java/">Print All Substrings Of A String In Java</a>
+</li>
+<li>
+<a href="https://javaconceptoftheday.com/java-8-stream-intermediate-and-terminal-operations/">Java 8 Stream Intermediate And Terminal Operations</a>
+</li>
+<li>
+<a href="https://javaconceptoftheday.com/differences-between-java-8-map-and-flatmap/">Differences Between Java 8 map() And flatMap()</a>
+</li>
+<li>
+<a href="https://javaconceptoftheday.com/java-8-merge-two-maps-with-same-keys/">Java 8 Merge Two Maps With Same Keys</a>
+</li>
+<li>
+<a href="https://javaconceptoftheday.com/merge-two-arrays-into-single-sorted-array-without-duplicates-in-java/">Merge Two Arrays Into Single Sorted Array Without Duplicates In Java</a>
+</li>
+<li>
+<a href="https://javaconceptoftheday.com/java-8-sort-hashmap-by-values/">Java 8 Sort HashMap By Values</a>
+</li>
+</ul>
+</section><section id="top-posts-2" class="widget widget-7 widget_top-posts"><h3 class="widget-title">Popular Posts :</h3><ul>				<li>
+<a href="https://javaconceptoftheday.com/java-interview-programs-with-solutions/" class="bump-view" data-bump-view="tp">85+ Popular Java Interview Programs With Solutions</a>					</li>
+<li>
+<a href="https://javaconceptoftheday.com/how-to-count-occurrences-of-each-character-in-string-in-java/" class="bump-view" data-bump-view="tp">How To Count Occurrences Of Each Character In String In Java?</a>					</li>
+<li>
+<a href="https://javaconceptoftheday.com/remove-white-spaces-from-string-in-java/" class="bump-view" data-bump-view="tp">How To Remove White Spaces from String In Java?</a>					</li>
+<li>
+<a href="https://javaconceptoftheday.com/java-exception-handling-interview-questions-and-answers/" class="bump-view" data-bump-view="tp">30 Java Exception Handling Interview Questions And Answers</a>					</li>
+<li>
+<a href="https://javaconceptoftheday.com/garbage-collection-finalize-method-java/" class="bump-view" data-bump-view="tp">Garbage Collection And finalize() method In Java</a>					</li>
+<li>
+<a href="https://javaconceptoftheday.com/number-pattern-programs-in-java/" class="bump-view" data-bump-view="tp">20 Different Number Pattern Programs In Java</a>					</li>
+</ul></section><section id="custom_html-5" class="widget_text widget widget-8 widget-last widget_custom_html"><div class="textwidget custom-html-widget"><div id = 'vdo_ai_div'></div><script>(function(v,d,o,ai){ai=d.createElement('script');ai.defer=true;ai.async=true;ai.src=v.location.protocol+o;d.head.appendChild(ai);})(window, document, '//a.vdo.ai/core/javaconceptofthedayv2/vdo.ai.js?vdo=34');</script></div></section>
+</aside><!-- #sidebar-primary -->
+</div>
+</div><!-- .main-wrap -->
+</div><!-- .main-inner -->
+<div id="sidebar-secondary-wrap">
+<aside id="sidebar-secondary" class="sidebar" role="complementary" aria-label="Sidebar 2 Sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+<section id="custom_html-4" class="widget_text widget widget-1 widget-first widget_custom_html"><h3 class="widget-title">Content Menu</h3><div class="textwidget custom-html-widget"><div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#GettingStarted">
+Getting Started
+</a>
+</h4>
+</div>
+<div id="GettingStarted" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/jdk-installation/">&#8674;JDK Installation</a><br>
+<a href="https://javaconceptoftheday.com/simple-hello-world-java-program/">&#8674;Simple Hello World Java Program</a><br>
+<a href="https://javaconceptoftheday.com/compiling-and-running-java-program/">&#8674;Compile And Run A Java Program</a><br>
+<a href="https://javaconceptoftheday.com/setting-path-environment-variable/">&#8674;Set Path Environment Variable</a><br>
+<a href="https://javaconceptoftheday.com/javac-command-and-java-command/">&#8674;javac And java Command</a><br>
+<a href="https://javaconceptoftheday.com/naming-compiling-and-running-java-files-containing-more-than-one-class-definitions/">&#8674;Name, Compile And Run Java Files</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#ClassesObjects">
+Classes & Objects
+</a>
+</h4>
+</div>
+<div id="ClassesObjects" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/static-members-java/">&#8674;Static members</a><br>
+<a href="https://javaconceptoftheday.com/non-static-members-in-java/">&#8674;Non-Static members</a><br>
+<a href="https://javaconceptoftheday.com/constructors-in-java/">&#8674;Constructors</a><br>
+<a href="https://javaconceptoftheday.com/instance-initialization-block-in-java/">&#8674;IIB</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-questions-on-classes-and-objects/">&#8674;Quiz</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Inheritance">
+Inheritance
+</a>
+</h4>
+</div>
+<div id="Inheritance" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/inheritance-in-java/">&#8674;Inheritance Tutorials</a><br>
+<a href="https://javaconceptoftheday.com/super-and-this-keywords-in-java/">&#8674;super & this keywords</a><br>
+<a href="https://javaconceptoftheday.com/java-inheritance-practice-coding-questions/">&#8674;Quiz On Inheritance</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-inheritance/">&#8674;Inheritance Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Polymorphism">
+Polymorphism
+</a>
+</h4>
+</div>
+<div id="Polymorphism" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/polymorphism-in-java/">&#8674;What Is Polymorphism?</a><br>
+<a href="https://javaconceptoftheday.com/method-overloading-in-java/">&#8674;Method Overloading</a><br>
+<a href="https://javaconceptoftheday.com/method-overriding-java/">&#8674;Method Overriding</a><br>
+<a href="https://javaconceptoftheday.com/static-binding-and-dynamic-binding-in-java/">&#8674;Static & Dynamic Binding</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-method-overloading-and-method-overriding-in-java/">&#8674;Overloading Vs Overriding</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-questions-on-method-overloading-and-overriding/">&#8674;Quiz On Polymorphism</a><br>
+<a href="https://javaconceptoftheday.com/important-java-interview-questions-on-method-overloading/">&#8674;Overloading Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-method-overriding/">&#8674;Overriding Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Abstraction">
+Abstraction
+</a>
+</h4>
+</div>
+<div id="Abstraction" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/abstraction-in-java/">&#8674;Abstract Class</a><br>
+<a href="https://javaconceptoftheday.com/interfaces-in-java/">&#8674;Interfaces</a><br>
+<a href="https://javaconceptoftheday.com/interface-vs-abstract-class-after-java-8/">&#8674;Interface Vs Abstract Class</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-coding-questions-on-abstract-classes/">&#8674;Quiz On Abstract Class</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-coding-questions-on-interfaces/">&#8674;Quiz On Interfaces</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-abstract-class/">&#8674;Abstract Class Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-interfaces/">&#8674;Interfaces Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#packages">
+Packages
+</a>
+</h4>
+</div>
+<div id="packages" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/packages-in-java/">&#8674;What Are Packages?</a><br>
+<a href="https://javaconceptoftheday.com/access-modifiers-in-java/">&#8674;Access Modifiers</a><br>
+<a href="https://javaconceptoftheday.com/access-and-non-access-modifiers-in-java/">&#8674;Access Vs Non-access Modifiers</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-questions-on-access-modifiers/">&#8674;Quiz On Modifiers</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-modifiers/">&#8674;Modifiers Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#TypeCasting">
+Type Casting
+</a>
+</h4>
+</div>
+<div id="TypeCasting" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/type-casting-in-java/">&#8674;Type Casting</a><br>
+<a href="https://javaconceptoftheday.com/classcastexception-in-java/">&#8674;ClassCastException In Java</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-type-casting/">&#8674;Type Casting Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#NestedClasses">
+Nested Classes
+</a>
+</h4>
+</div>
+<div id="NestedClasses" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/nested-classes-in-java/">&#8674;Static Nested Classes</a><br>
+<a href="https://javaconceptoftheday.com/inner-classes-in-java/">&#8674;Non-static Nested Classes</a><br>
+<a href="https://javaconceptoftheday.com/local-inner-class-in-java/">&#8674;Local Inner Classes</a><br>
+<a href="https://javaconceptoftheday.com/anonymous-inner-class-in-java/">&#8674;Anonymous Inner Classes</a><br>
+<a href="https://javaconceptoftheday.com/variable-hiding-shadowing-java/">&#8674;Variable Hiding Or Shadowing</a><br>
+<a href="https://javaconceptoftheday.com/inheritance-inner-classes-java/">&#8674;Inheritance Of Inner Classes</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-coding-questions-on-nested-classes/">&#8674;Quiz On Nested Classes</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-nested-classes/">&#8674;Nested Classes Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#JavaEnums">
+Java Enums
+</a>
+</h4>
+</div>
+<div id="JavaEnums" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/java-enums-tutorial-with-examples/">&#8674;Java Enums Tutorials</a><br>
+<a href="https://javaconceptoftheday.com/18-points-every-java-developer-should-know-about-enums-in-java/">&#8674;Java Enums In 18 Points</a><br>
+<a href="https://javaconceptoftheday.com/java-practice-coding-questions-on-enum-types/">&#8674;Quiz On Java Enums</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#WrapperClasses">
+Wrapper Classes
+</a>
+</h4>
+</div>
+<div id="WrapperClasses" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/wrapper-classes-java/">&#8674;Wrapper Classes Introduction</a><br>
+<a href="https://javaconceptoftheday.com/constructors-methods-wrapper-classes-java/">&#8674;Wrapper Classes : Constructors & Methods</a><br>
+<a href="https://javaconceptoftheday.com/valueof-method-wrapper-classes-java/">&#8674;valueOf() Method</a><br>
+<a href="https://javaconceptoftheday.com/number-class-java/">&#8674;Number Class</a><br>
+<a href="https://javaconceptoftheday.com/auto-widening-auto-boxing-auto-upcasting-java/">&#8674;Auto-widening Vs Auto-boxing Vs Auto-upcasting</a><br>
+<a href="https://javaconceptoftheday.com/isnan-and-isinfinite-methods-java/">&#8674;isNaN() & isInfinite() Methods</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Arrays">
+Arrays
+</a>
+</h4>
+</div>
+<div id="Arrays" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/arrays-in-java/">&#8674;Arrays In Java</a><br>
+<a href="https://javaconceptoftheday.com/array-of-objects-in-java/">&#8674;Array Of Objects</a><br>
+<a href="https://javaconceptoftheday.com/how-are-the-arrays-stored-in-the-memory/">&#8674;Array Memory Management</a><br>
+<a href="https://javaconceptoftheday.com/multidimensional-arrays-in-java/">&#8674;Multidimensional Arrays</a><br>
+<a href="https://javaconceptoftheday.com/jagged-arrays-in-java/">&#8674;Jagged Arrays</a><br>
+<a href="https://javaconceptoftheday.com/array-parameter-return-types-method/">&#8674;Arrays As Parameters & Return Types</a><br>
+<a href="https://javaconceptoftheday.com/copying-an-array-in-java/">&#8674;Array Copy</a><br>
+<a href="https://javaconceptoftheday.com/java-util-arrays-class-java/">&#8674;java.util.arrays Class-1</a><br>
+<a href="https://javaconceptoftheday.com/java-util-arrays-class-java-contd/">&#8674;java.util.arrays Class-2</a><br>
+<a href="https://javaconceptoftheday.com/interesting-observations-about-arrays-in-java/">&#8674;Java Arrays : 10 Interesting Observations</a><br>
+<a href="https://javaconceptoftheday.com/10-java-interview-sample-coding-questions-on-arrays/">&#8674;Java Arrays Quiz</a><br>
+<a href="https://javaconceptoftheday.com/java-array-interview-questions-and-answers/">&#8674;Java Arrays Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-array-interview-programs/">&#8674;Array Interview Programs</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Strings">
+Strings
+</a>
+</h4>
+</div>
+<div id="Strings" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/introduction-strings/">&#8674;Introduction To Strings</a><br>
+<a href="https://javaconceptoftheday.com/how-the-strings-are-stored-in-the-memory/">&#8674;How the strings are stored in the memory?</a><br>
+<a href="https://javaconceptoftheday.com/example-to-prove-strings-are-immutable/">&#8674;Strings Are Immutable : An Example</a><br>
+<a href="https://javaconceptoftheday.com/when-to-use-equals-hashcode-on-strings/">&#8674;When To Use "==", equals() and hashCode() On Strings?</a><br>
+<a href="https://javaconceptoftheday.com/stringbuffer-stringbuilder-string-class/">&#8674;String Vs StringBuffer Vs StringBuilder</a><br>
+<a href="https://javaconceptoftheday.com/string-intern-java/">&#8674;What Is String Intern?</a><br>
+<a href="https://javaconceptoftheday.com/exploring-java-lang-string-class/">&#8674;java.lang.String : Constructors</a><br>
+<a href="https://javaconceptoftheday.com/exploring-java-lang-string-class-concatenation-of-strings/">&#8674;String Concatenation</a><br>
+<a href="https://javaconceptoftheday.com/character-extraction/">&#8674;Character Extraction</a><br>
+<a href="https://javaconceptoftheday.com/tutorial-examples-strings-in-java/">&#8674;Java Strings : 20 Points</a><br>
+<a href="https://javaconceptoftheday.com/java-string-interview-questions-and-answers/">&#8674;Java Strings Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-programs-on-strings/">&#8674;Strings Interview Programs</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#ExceptionHandling">
+Exception Handling
+</a>
+</h4>
+</div>
+<div id="ExceptionHandling" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/exception-handling-java/">&#8674;Java Exception Handling </a><br>
+<a href="https://javaconceptoftheday.com/try-catch-finally-blocks-java/">&#8674;try, catch & finally Blocks</a><br>
+<a href="https://javaconceptoftheday.com/multiple-catch-blocks-java/">&#8674;Multiple catch Blocks</a><br>
+<a href="https://javaconceptoftheday.com/nested-try-catch-blocks-java/">&#8674;Nested try-catch blocks</a><br>
+<a href="https://javaconceptoftheday.com/return-value-from-try-catch-finally-blocks/">&#8674;Return Value From try-catch-finally Blocks</a><br>
+<a href="https://javaconceptoftheday.com/hierarchy-exceptions-java/">&#8674;Hierarchy Of Exceptions</a><br>
+<a href="https://javaconceptoftheday.com/throwing-rethrowing-exception-java/">&#8674;throw Keyword</a><br>
+<a href="https://javaconceptoftheday.com/throws-keyword-java/">&#8674;throws Keyword</a><br>
+<a href="https://javaconceptoftheday.com/method-overriding-with-throws-clause/">&#8674;Method Overriding With throws Clause</a><br>
+<a href="https://javaconceptoftheday.com/checked-unchecked-exceptions-java/">&#8674;Checked & Unchecked Exceptions</a><br>
+<a href="https://javaconceptoftheday.com/user-defined-exceptions-java/">&#8674;User Defined Exceptions</a><br>
+<a href="https://javaconceptoftheday.com/chained-exceptions-java/">&#8674;Chained Exceptions</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-throw-throws-and-throwable-in-java/">&#8674;throw Vs throws Vs Throwable</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-error-vs-exception-in-java/">&#8674;Error Vs Exception</a><br>
+<a href="https://javaconceptoftheday.com/classnotfoundexception-vs-noclassdeffounderror-in-java/">&#8674;ClassNotFoundException Vs NoClassDefFoundError</a><br>
+<a href="https://javaconceptoftheday.com/frequently-occurring-exceptions-in-java-with-examples/">&#8674;Frequently Occurring Exceptions In Java</a><br>
+<a href="https://javaconceptoftheday.com/java-exception-handling-interview-questions-and-answers/">&#8674;Exception Handling Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Threads">
+Threads
+</a>
+</h4>
+</div>
+<div id="Threads" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/threads-in-java/">&#8674;Introduction To Threads </a><br>
+<a href="https://javaconceptoftheday.com/creating-threads-in-java/">&#8674;Thread Creation</a><br>
+<a href="https://javaconceptoftheday.com/defining-threads-in-java/">&#8674;Different Ways Of Using Threads</a><br>
+<a href="https://javaconceptoftheday.com/types-threads-java/">&#8674;Types Of Threads</a><br>
+<a href="https://javaconceptoftheday.com/naming-thread-java/">&#8674;Thread Naming</a><br>
+<a href="https://javaconceptoftheday.com/how-to-identify-a-thread-in-java/">&#8674;Thread Identification</a><br>
+<a href="https://javaconceptoftheday.com/priority-thread-java/">&#8674;Thread Priority</a><br>
+<a href="https://javaconceptoftheday.com/thread-sleep-method-java/">&#8674;Thread.sleep() Method</a><br>
+<a href="https://javaconceptoftheday.com/joining-threads-java/">&#8674;Thread.join() Method</a><br>
+<a href="https://javaconceptoftheday.com/thread-interference-in-java/">&#8674;Thread Interference</a><br>
+<a href="https://javaconceptoftheday.com/synchronization-in-java/">&#8674;Thread Synchronization</a><br>
+<a href="https://javaconceptoftheday.com/deadlock-in-java/">&#8674;Thread Deadlock</a><br>
+<a href="https://javaconceptoftheday.com/detect-deadlocked-threads-using-threadmxbean-class-java/">&#8674;How To Detect deadlocked threads In Java?</a><br>
+<a href="https://javaconceptoftheday.com/avoid-the-deadlock-java/">&#8674;How To Avoid Deadlock In Java?</a><br>
+<a href="https://javaconceptoftheday.com/interthread-communication-using-wait-notify-notifyall/">&#8674;Interthread Communication Using wait(), notify() & notifyAll()</a><br>
+<a href="https://javaconceptoftheday.com/thread-interruption-java/">&#8674;Thread.interrupt() Method</a><br>
+<a href="https://javaconceptoftheday.com/thread-life-cycle-thread-states-java/">&#8674;Thread Life Cycle</a><br>
+<a href="https://javaconceptoftheday.com/thread-group-java/">&#8674;Thread Group</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/">&#8674;wait() Vs sleep()</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-program-vs-process-vs-threads/">&#8674;Program Vs Process Vs Threads</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-used-threads-vs-daemon-threads-in-java/">&#8674;User Threads Vs Daemon Threads</a><br>
+<a href="https://javaconceptoftheday.com/extends-thread-vs-implements-runnable-in-java/">&#8674;Extends Thread Vs Implements Runnable</a><br>
+<a href="https://javaconceptoftheday.com/how-to-stop-a-thread-in-java/">&#8674;How To Stop A Thread?</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-notify-and-notifyall-in-java/">&#8674;notify() Vs notifyAll()</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-blocked-vs-waiting-states-in-java/">&#8674;BLOCKED Vs WAITING States</a><br>
+<a href="https://javaconceptoftheday.com/start-and-run-methods-in-java-threads/">&#8674;start() Vs run()</a><br>
+<a href="https://javaconceptoftheday.com/7-things-every-java-programmer-should-know-about-threads-in-java/">&#8674;Java Threads : 7 Special Observations</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#FileIO">
+File I/O
+</a>
+</h4>
+</div>
+<div id="FileIO" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/append-text-to-a-file-in-java/">&#8674;How To Append Text To A File?</a><br>
+<a href="https://javaconceptoftheday.com/find-number-of-characters-words-and-lines-in-file-in-java/">&#8674;How To Find Number Of Chars, Words & Lines in A File?</a><br>
+<a href="https://javaconceptoftheday.com/find-most-repeated-word-in-text-file-in-java/">&#8674;How To Find Most Repeated Word In Text File?</a><br>
+<a href="https://javaconceptoftheday.com/how-to-sort-a-text-file-in-java/">&#8674;How To Sort A Text File?</a><br>
+<a href="https://javaconceptoftheday.com/set-file-permissions-in-java/">&#8674;How To Set File Permissions?</a><br>
+<a href="https://javaconceptoftheday.com/compare-two-text-files-in-java/">&#8674;How To Compare Two Text Files?</a><br>
+<a href="https://javaconceptoftheday.com/read-and-write-images-in-java/">&#8674;How To Read & Write Images?</a><br>
+<a href="https://javaconceptoftheday.com/modify-replace-specific-string-in-text-file-in-java/">&#8674;How To Replace Specific String In Text File?</a><br>
+<a href="https://javaconceptoftheday.com/copy-a-file-in-java/">&#8674;How To Copy A File?</a><br>
+<a href="https://javaconceptoftheday.com/make-text-file-read-only-in-java/">&#8674;How To Make Text File Read-only?</a><br>
+<a href="https://javaconceptoftheday.com/find-type-total-space-free-space-and-usable-space-of-all-drives-in-java/">&#8674;How To Find Type, Total Space, Free Space & Usable Space Of All Drives?</a><br>
+<a href="https://javaconceptoftheday.com/list-all-files-in-directory-in-java/">&#8674;How To List All Files In Directory?</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Generics">
+Generics
+</a>
+</h4>
+</div>
+<div id="Generics" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/why-we-need-generics-in-java/">&#8674;Why We Need generics?</a><br>
+<a href="https://javaconceptoftheday.com/defining-generic-class-in-java/">&#8674;Generic Class</a><br>
+<a href="https://javaconceptoftheday.com/generic-interfaces-java/">&#8674;Generic Interfaces</a><br>
+<a href="https://javaconceptoftheday.com/generic-methods-and-generic-constructors/">&#8674;Generic Methods & Constructors</a><br>
+<a href="https://javaconceptoftheday.com/bounded-types/">&#8674;Bounded Types</a><br>
+<a href="https://javaconceptoftheday.com/wildcard-arguments-java/">&#8674;Wildcard Arguments</a><br>
+<a href="https://javaconceptoftheday.com/generics-and-their-inheritance/">&#8674;Generics And Their Inheritance</a><br>
+<a href="https://javaconceptoftheday.com/type-erasure/">&#8674;Type Erasure</a><br>
+<a href="https://javaconceptoftheday.com/some-interesting-observations-about-generics-in-java/">&#8674;Generics : Interesting Observations</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#JavaCollections">
+Java Collections
+</a>
+</h4>
+</div>
+<div id="JavaCollections" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/collection-framework-class-hierarchy/">&#8674;Class Hierarchy</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-collection-interface/">&#8674;Collection Interface</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-list-interface/">&#8674;List Interface</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-arraylist-class/">&#8674;ArrayList Class</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-array-vs-arraylist-in-java/">&#8674;Array Vs ArrayList</a><br>
+<a href="https://javaconceptoftheday.com/advantages-of-using-arraylist-over-arrays/">&#8674;Advantages Of ArrayList Over Arrays</a><br>
+<a href="https://javaconceptoftheday.com/java-arraylist-programming-examples/">&#8674;ArrayList Programs</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-iterator-and-listiterator-in-java/">&#8674;Iterator Vs ListIterator</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-vector-class/">&#8674;Vector Class</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-arraylist-and-vector-class/">&#8674;ArrayList Vs Vector</a><br>
+<a href="https://javaconceptoftheday.com/not-use-vector-class-code/">&#8674;Why Not To Use Vector Class In Your Code?</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-linkedlist-class/">&#8674;LinkedList Class</a><br>
+<a href="https://javaconceptoftheday.com/arraylist-vs-linkedlist-java/">&#8674;ArrayList Vs LinkedList</a><br>
+<a href="https://javaconceptoftheday.com/java-linkedlist-programming-examples/">&#8674;LinkedList Programs</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-queue-interface/">&#8674;Queue Interface</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-priorityqueue-class/">&#8674;PriorityQueue Class</a><br>
+<a href="https://javaconceptoftheday.com/java-priorityqueue-example/">&#8674;PriorityQueue Example With Program</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-deque-interface/">&#8674;Deque Interface</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-arraydeque-class/">&#8674;ArrayDeque Class</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-set-interface/">&#8674;Set Interface</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-hashset-class/">&#8674;HashSet Class</a><br>
+<a href="https://javaconceptoftheday.com/how-hashset-works-internally-in-java/">&#8674;How HashSet Works?</a><br>
+<a href="https://javaconceptoftheday.com/java-hashset-example/">&#8674;HashSet Example With Program</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-linkedhashset-class/">&#8674;LinkedHashSet Class</a><br>
+<a href="https://javaconceptoftheday.com/how-linkedhashset-works-internally-in-java/">&#8674;How LinkedHashSet Works?</a><br>
+<a href="https://javaconceptoftheday.com/java-linkedhashset-example/">&#8674;LinkedHashSet Example With Program</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-sortedset-interface/">&#8674;SortedSet Interface</a><br>
+<a href="https://javaconceptoftheday.com/collection-framework-navigableset-interface/">&#8674;NavigableSet Interface</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-treeset-class/">&#8674;TreeSet Class</a><br>
+<a href="https://javaconceptoftheday.com/java-treeset-example/">&#8674;TreeSet Example With Program</a><br>
+<a href="https://javaconceptoftheday.com/hashset-vs-linkedhashset-vs-treeset-in-java/">&#8674;HashSet Vs LinkedHashSet Vs TreeSet</a><br>
+<a href="https://javaconceptoftheday.com/java-collection-framework-map-interface/">&#8674;Map Interface</a><br>
+<a href="https://javaconceptoftheday.com/hashmap-in-java-with-example/">&#8674;HashMap Class</a><br>
+<a href="https://javaconceptoftheday.com/how-hashmap-works-internally-in-java/">&#8674;How HashMap Works?</a><br>
+<a href="https://javaconceptoftheday.com/initial-capacity-and-load-factor-of-hashmap-in-java/">&#8674;Initial Capacity & Load Factor</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-hashmap-vs-hashset-in-java/">&#8674;HashMap Vs hashSet</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-hashmap-and-hashtable-in-java/">&#8674;HashMap Vs HashTable</a><br>
+<a href="https://javaconceptoftheday.com/java-hashmap-programs-and-examples/">&#8674;HashMap Programs</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#JDBC">
+JDBC
+</a>
+</h4>
+</div>
+<div id="JDBC" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/java-jdbc-tutorial/">&#8674;Introduction To JDBC</a><br>
+<a href="https://javaconceptoftheday.com/types-of-jdbc-drivers/">&#8674;Types Of JDBC Drivers</a><br>
+<a href="https://javaconceptoftheday.com/how-to-connect-to-the-database-in-java/">&#8674;Database Connection</a><br>
+<a href="https://javaconceptoftheday.com/drivermanager-class-in-java/">&#8674;DriverManager Class</a><br>
+<a href="https://javaconceptoftheday.com/java-sql-connection-interface-in-jdbc/">&#8674;java.sql.Connection Interface</a><br>
+<a href="https://javaconceptoftheday.com/java-jdbc-tutorial-sql-create-insert-select-update-delete-examples/">&#8674;CREATE, INSERT, SELECT, UPDATE & DELETE Examples</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/">&#8674;executeQuery() Vs executeUpdate() Vs execute()</a><br>
+<a href="https://javaconceptoftheday.com/preparedstatement-in-java/">&#8674;PreparedStatement</a><br>
+<a href="https://javaconceptoftheday.com/java-callablestatement-stored-procedures-in-out-parameters-examples/">&#8674;CallableStatement</a><br>
+<a href="https://javaconceptoftheday.com/statement-vs-preparedstatement-vs-callablestatement-in-java/">&#8674;Statement Vs PreparedStatement Vs CallableStatement</a><br>
+<a href="https://javaconceptoftheday.com/resultsetmetadata-in-jdbc-with-example/">&#8674;ResultSetMetaData</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#InterviewPrograms">
+Interview Programs
+</a>
+</h4>
+</div>
+<div id="InterviewPrograms" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/java-interview-programs-with-solutions/">&#8674;85+ Java Interview Programs With Solutions</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#InterviewQA">
+Interview Q&A
+</a>
+</h4>
+</div>
+<div id="InterviewQA" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-main-method/">&#8674;Interview Q&A On main()</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-constructors/">&#8674;Interview Q&A On Constructors</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-inheritance/">&#8674;Inheritance Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-modifiers/">&#8674;Modifiers Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-type-casting/">&#8674;Type Casting Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/important-java-interview-questions-on-method-overloading/">&#8674;Overloading Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-method-overriding/">&#8674;Overriding Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-abstract-class/">&#8674;Abstract Class Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-interfaces/">&#8674;Interface Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-final-keyword/">&#8674;final Keyword Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-interview-questions-on-nested-classes/">&#8674;Nested Classes Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-array-interview-questions-and-answers/">&#8674;Array Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-string-interview-questions-and-answers/">&#8674;String Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/java-exception-handling-interview-questions-and-answers/">&#8674;Exception Handling Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/core-java-coding-questions-which-will-test-your-java-basic-skills/">&#8674;40+ Core Java Coding Q&A</a><br>
+<a href="https://javaconceptoftheday.com/top-25-simple-basic-java-interview-questions-for-freshers/">&#8674;25 Simple Basic Java Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/tricky-core-java-interview-coding-questions/">&#8674;10 Tricky Java Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/15-simple-but-confusing-java-interview-questions/">&#8674;15 Simple But Confusing Interview Q&A</a><br>
+<a href="https://javaconceptoftheday.com/10-java-interview-programmatic-questions-and-answers/">&#8674;10 Programmatic Interview Q&A</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#XvsY">
+x Vs y
+</a>
+</h4>
+</div>
+<div id="XvsY" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/difference-between-final-finally-and-finalize-in-java/">&#8674;final Vs finally Vs finalize</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-collection-and-collections-in-java/">&#8674;Collection Vs Collections</a><br>
+<a href="https://javaconceptoftheday.com/fail-fast-and-fail-safe-iterators-in-java-with-examples/">&#8674;Fail-Fast Vs Fail-Safe</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-operator-and-equals-method-in-java/">&#8674;"==" Vs equals()</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-shallow-copy-vs-deep-copy-in-java/">&#8674;Shallow Copy Vs Deep Copy</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-iterator-and-listiterator-in-java/">&#8674;Iterator Vs ListIterator</a><br>
+<a href="https://javaconceptoftheday.com/arraylist-vs-linkedlist-java/">&#8674;ArrayList Vs LinkedList</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/">&#8674;wait() Vs sleep()</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-throw-throws-and-throwable-in-java/">&#8674;throw Vs throws Vs Throwable</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-error-vs-exception-in-java/">&#8674;Error Vs Exception</a><br>
+<a href="https://javaconceptoftheday.com/classnotfoundexception-vs-noclassdeffounderror-in-java/">&#8674;ClassNotFoundException Vs NoClassDefFoundError</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-program-vs-process-vs-threads/">&#8674;Program Vs Process Vs Threads</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-used-threads-vs-daemon-threads-in-java/">&#8674;User Threads Vs Daemon Threads</a><br>
+<a href="https://javaconceptoftheday.com/access-and-non-access-modifiers-in-java/">&#8674;Access Vs Non-access Modifiers</a><br>
+<a href="https://javaconceptoftheday.com/extends-thread-vs-implements-runnable-in-java/">&#8674;Extends Thread Vs Implements Runnable</a><br>
+<a href="https://javaconceptoftheday.com/statement-vs-preparedstatement-vs-callablestatement-in-java/">&#8674;Statement Vs PreparedStatement Vs CallableStatement</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/">&#8674;execute() Vs executeQuery() Vs executeUpdate()</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-hashmap-vs-hashset-in-java/">&#8674;HashMap Vs HashSet</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-enumeration-vs-iterator-in-java/">&#8674;Enumeration Vs Iterator</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-notify-and-notifyall-in-java/">&#8674;notify() Vs notifyAll()</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-hashmap-and-hashtable-in-java/">&#8674;HashMap Vs HashTable</a><br>
+<a href="https://javaconceptoftheday.com/difference-between-blocked-vs-waiting-states-in-java/">&#8674;BLOCKED Vs WAITING States</a><br>
+<a href="https://javaconceptoftheday.com/class-variables-and-instance-variables-in-java/">&#8674;Class Variables Vs Instance Variables</a><br>
+<a href="https://javaconceptoftheday.com/differences-between-array-vs-arraylist-in-java/">&#8674;Array Vs ArrayList</a><br>
+<a href="https://javaconceptoftheday.com/stackoverflowerror-vs-outofmemoryerror-in-java/">&#8674;StackOverflowError Vs OutOfMemoryError</a><br>
+<a href="https://javaconceptoftheday.com/start-and-run-methods-in-java-threads/">&#8674;start() Vs run()</a><br>
+<a href="https://javaconceptoftheday.com/interface-vs-abstract-class-after-java-8/">&#8674;Interface Vs Abstract Class</a><br>
+<a href="https://javaconceptoftheday.com/collections-and-streams-in-java/">&#8674;Collections Vs Streams</a><br>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-size:14px">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Java8">
+Java 8
+</a>
+</h4>
+</div>
+<div id="Java8" class="panel-collapse collapse">
+<div class="panel-body" style="font-size:14px">
+<a href="https://javaconceptoftheday.com/java-8-lambda-expressions/">&#8674;Java 8 Lambda Expressions</a><br>
+<a href="https://javaconceptoftheday.com/java-8-functional-interfaces/">&#8674;Java 8 Functional Interfaces</a><br>
+<a href="https://javaconceptoftheday.com/java-8-method-references/">&#8674;Java 8 Method References</a><br>
+<a href="https://javaconceptoftheday.com/java-8-interface-changes-default-methods-and-static-methods/">&#8674;Java 8 Interface Changes</a><br>
+<a href="https://javaconceptoftheday.com/interface-vs-abstract-class-after-java-8/">&#8674;Interface Vs Abstract Class After Java 8</a><br>
+<a href="https://javaconceptoftheday.com/java-8-streams-beginners-guide/">&#8674;Java 8 Streams</a><br>
+<a href="https://javaconceptoftheday.com/collections-and-streams-in-java/">&#8674;Collections Vs Streams</a><br>
+</div>
+</div>
+</div>
+</div></div></section>
+</aside><!-- #sidebar-secondary -->
+</div>
+</div><!-- #main -->
+<footer id="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+<div class="wrap">
+<p class="credit">
+<a class="site-link" href="https://javaconceptoftheday.com" rel="home">Java Concept Of The Day</a> &#169; 2020			<span id="footer-links"><a href="https://javaconceptoftheday.com/about-us/">About Us</a>
+<a href="https://javaconceptoftheday.com/privacy-policy/">Privacy Policy</a>
+<a href="https://javaconceptoftheday.com/contact-us/">Contact Us</a>
+</span>		</p><!-- .credit -->
+</div><!-- .wrap -->
+</footer><!-- #footer -->
+</div><!-- #container -->
+<!-- VDO.AI -->
+<!-- VDO.AI -->
+<!-- Bootstrap Menu -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap menu -->
+<!-- Infolinks -->
+<script type="text/javascript">
+var infolinks_pid = 3201805;
+var infolinks_wsid = 0;
+</script>
+<script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+<!-- Infolinks --><script>if (document.location.protocol != "https:") {document.location = document.URL.replace(/^http:/i, "https:");}</script><script type='text/javascript' src='https://javaconceptoftheday.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://javaconceptoftheday.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.9b'></script>
+<script type='text/javascript'>
+(function(){
+var corecss = document.createElement('link');
+var themecss = document.createElement('link');
+var corecssurl = "https://javaconceptoftheday.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+if ( corecss.setAttribute ) {
+corecss.setAttribute( "rel", "stylesheet" );
+corecss.setAttribute( "type", "text/css" );
+corecss.setAttribute( "href", corecssurl );
+} else {
+corecss.rel = "stylesheet";
+corecss.href = corecssurl;
+}
+document.head.appendChild( corecss );
+var themecssurl = "https://javaconceptoftheday.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+if ( themecss.setAttribute ) {
+themecss.setAttribute( "rel", "stylesheet" );
+themecss.setAttribute( "type", "text/css" );
+themecss.setAttribute( "href", themecssurl );
+} else {
+themecss.rel = "stylesheet";
+themecss.href = themecssurl;
+}
+document.head.appendChild( themecss );
+})();
+SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+SyntaxHighlighter.config.strings.help = '?';
+SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+SyntaxHighlighter.defaults['toolbar'] = false;
+SyntaxHighlighter.all();
+// Infinite scroll support
+if ( typeof( jQuery ) !== 'undefined' ) {
+jQuery( function( $ ) {
+$( document.body ).on( 'post-load', function() {
+SyntaxHighlighter.highlight();
+} );
+} );
+}
+</script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/comment-reply.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/8.2/_inc/build/photon/photon.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/8.2/_inc/build/lazy-images/js/lazy-images.min.js'></script>
+<script type='text/javascript' src='https://javaconceptoftheday.com/wp-content/themes/genbu/js/fitvids.min.js?ver=0.1.1'></script>
+<script type='text/javascript' src='https://javaconceptoftheday.com/wp-content/themes/genbu/js/theme.min.js?ver=1.3.0'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript' src='https://stats.wp.com/e-202007.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+_stq = window._stq || [];
+_stq.push([ 'view', {v:'ext',j:'1:8.2',blog:'163701226',post:'3581',tz:'5.5',srv:'javaconceptoftheday.com'} ]);
+_stq.push([ 'clickTrackerInit', '163701226', '3581' ]);
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+//$( document ).ajaxStart(function() {
+//});
+for (var i = 0; i < document.forms.length; ++i) {
+var form = document.forms[i];
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="joxd_KNHQDtc" value="U3jzrZYlRu0A" />'); }
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="rlwjf_dW-kKMA" value="yMjvPO[52IzAo" />'); }
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="FfSnamkq-_WDd" value="yl3djuZWsJE4z" />'); }
+}
+$(document).on('submit', 'form', function () {
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="joxd_KNHQDtc" value="U3jzrZYlRu0A" />'); }
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="rlwjf_dW-kKMA" value="yMjvPO[52IzAo" />'); }
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="FfSnamkq-_WDd" value="yl3djuZWsJE4z" />'); }
+return true;
+});
+jQuery.ajaxSetup({
+beforeSend: function (e, data) {
+//console.log(Object.getOwnPropertyNames(data).sort());
+//console.log(data.type);
+if (data.type !== 'POST') return;
+if (typeof data.data === 'object' && data.data !== null) {
+data.data.append("joxd_KNHQDtc", "U3jzrZYlRu0A");
+data.data.append("rlwjf_dW-kKMA", "yMjvPO[52IzAo");
+data.data.append("FfSnamkq-_WDd", "yl3djuZWsJE4z");
+}
+else {
+data.data =  data.data + '&joxd_KNHQDtc=U3jzrZYlRu0A&rlwjf_dW-kKMA=yMjvPO[52IzAo&FfSnamkq-_WDd=yl3djuZWsJE4z';
+}
+}
+});
+});
+</script>
+</body>
+</html><!-- WP Fastest Cache file was created in 0.37844109535217 seconds, on 12-02-20 15:50:30 -->
