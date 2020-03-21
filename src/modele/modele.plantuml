@@ -6,6 +6,7 @@ title __MODELE's Class Diagram__\n
     class modele.ImageManager {
         {static} - mngr : ImageManager
         {static} + getInstance()
+        - image : ImageIO
         + loadPerspectives()
         - ImageManager()
     }

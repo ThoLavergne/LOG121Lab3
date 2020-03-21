@@ -3,6 +3,18 @@
 title __CONTROLLER's Class Diagram__\n
 
   namespace controller {
+    class controller.CommandManager {
+        - commands : ArrayList
+        {static} - mngr : CommandManager
+        {static} + getInstance()
+        + redo()
+        + undo()
+        - CommandManager()
+    }
+  }
+  
+
+  namespace controller {
     abstract class controller.ImageCommand {
     }
   }
