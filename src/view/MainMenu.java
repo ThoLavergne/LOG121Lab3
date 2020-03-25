@@ -1,4 +1,6 @@
 package view;
 
-public class MainMenu {
+import javax.swing.*;
+
+public class MainMenu extends JMenuBar {
 }
