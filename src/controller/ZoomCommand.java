@@ -5,20 +5,12 @@ import java.awt.event.ActionListener;
 
 public class ZoomCommand extends PerspectiveCommand{
 
-    @Override
+    /*@Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-    }
+    }*/
 
-    public void zoom(){
-
-    }
-
-    public void zoomIn(){
-
-    }
-
-    public void zoomOut(){
+    protected void execute(ActionEvent actionEvent){
 
     }
 }

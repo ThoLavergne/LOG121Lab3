@@ -2,20 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f9e783b-58e7-430e-a15e-7d9680f376d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controller/DeserializeCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/PerspectiveCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/SerializeCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/MainMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/LoadCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/RedoCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/UndoCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/memento/Memento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modele/Image.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modele/ImagePerspectivePackage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EquivalencesPatrons.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/EquivalencesPatrons.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LOG121LAB3.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/LOG121LAB3.plantuml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/DeserializeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/DeserializeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ImageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ImageCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/PerspectiveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PerspectiveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SerializeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SerializeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/TranslateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TranslateCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ZoomCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ZoomCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/controller.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/controller.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/modele.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/modele.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/observer/observer.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer/observer.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/program/program.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/program.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/view.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view.plantuml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/ImageManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/Perspective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Perspective.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +46,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LOG121Lab2" />
@@ -86,10 +90,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser" timestamp="1584807449445">
+    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser" timestamp="1585168392820">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584807449445" />
+    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1585168392820" />
     <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1584807186203">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
