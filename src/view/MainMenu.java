@@ -1,5 +1,6 @@
 package view;
 
+import controller.CommandManager;
 import org.w3c.dom.*;
 
 import javax.swing.*;
@@ -94,13 +95,16 @@ public class MainMenu extends JMenuBar {
         JMenuItem commandsZoom = new JMenuItem(MENU__COMMAND_ZOOM);
         JMenuItem commandsUndo = new JMenuItem(MENU_COMMAND_UNDO);
         JMenuItem commandsRedo = new JMenuItem(MENU_COMMAND_REDO);
+        CommandManager commandManager = CommandManager.getInstance();
         commandsTranslate.addActionListener((ActionEvent e) -> { //TODO
         });
         commandsZoom.addActionListener((ActionEvent e) -> { //TODO
         });
         commandsUndo.addActionListener((ActionEvent e) -> { //TODO
+            commandManager.undo();
         });
         commandsRedo.addActionListener((ActionEvent e) -> { //TODO
+            commandManager.redo();
         });
         menuCommands.add(commandsTranslate);
         menuCommands.add(commandsZoom);
