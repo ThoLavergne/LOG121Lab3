@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Perspective implements MyObservable {
 
-    private double zoom;
-    private Point translation;
+    private double zoom = 1;
+    private Point translation = new Point(0,0);
     private ArrayList<MyObserver> observers = new ArrayList<MyObserver>();
 
     public Perspective(){}
@@ -20,6 +20,9 @@ public class Perspective implements MyObservable {
         this.translation = translation;
     }
 
+    /**
+     * Méthode qui avertit tous les observers
+     */
     @Override
     public void notifyObservers() {
         for (MyObserver o : observers){
@@ -27,16 +30,25 @@ public class Perspective implements MyObservable {
         }
     }
 
+    /**
+     * Méthode qui ajoute un observer
+     * @param obs
+     */
     @Override
     public void addObserver(MyObserver obs) {
         observers.add(obs);
     }
 
+    /**
+     * Méthode qui retire un observer
+     * @param obs
+     */
     @Override
     public void removeObserver(MyObserver obs){
         observers.remove(obs);
     }
 
+    //Accesseurs et mutateurs
     public double getZoom(){
         return this.zoom;
     }
@@ -61,7 +73,7 @@ public class Perspective implements MyObservable {
     //Méthode qui pose cette perspective à une version antérieure
     public void setMemento(Memento mem){
         this.zoom = mem.getZoomMemorized();
-        this.translation = mem.getTranslationMemorized();
+        this.translation = (Point) mem.getTranslationMemorized().clone();
     }
 
 }

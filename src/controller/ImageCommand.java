@@ -1,14 +1,8 @@
 package controller;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 
-public abstract class ImageCommand extends AbstractAction {
+public abstract class ImageCommand {
 
-    @Override
-    public void actionPerformed(ActionEvent e){
-        execute();
-    }
+    public abstract void execute(java.awt.Image img);
 
-    public abstract void execute();
 }
