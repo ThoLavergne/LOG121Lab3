@@ -101,10 +101,8 @@ public class MainMenu extends JMenuBar {
         commandsZoom.addActionListener((ActionEvent e) -> { //TODO
         });
         commandsUndo.addActionListener((ActionEvent e) -> { //TODO
-            commandManager.undo();
         });
         commandsRedo.addActionListener((ActionEvent e) -> { //TODO
-            commandManager.redo();
         });
         menuCommands.add(commandsTranslate);
         menuCommands.add(commandsZoom);
