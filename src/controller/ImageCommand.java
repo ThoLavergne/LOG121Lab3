@@ -1,6 +1,8 @@
 package controller;
 
-import javax.swing.*;
 
-public abstract class ImageCommand extends AbstractAction {
+public abstract class ImageCommand {
+
+    public abstract void execute(java.awt.Image img);
+
 }
