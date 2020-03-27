@@ -3,30 +3,39 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+import static view.MainWindow.TAILLE_FENETRE;
+
 public class MainPanel extends JPanel {
 
     public MainPanel(){
 
-        setBackground(Color.GREEN);
+        setBackground(Color.BLACK);
         setLayout(new BorderLayout());
 
-        ImagePanel panel1 = new ImagePanel();
+        ImagePanel panelGauche = new ImagePanel();
+        JPanel panelDroite = new JPanel();
         ImagePanel panel2 = new ImagePanel();
         ImagePanel panel3 = new ImagePanel();
 
-        panel1.setSize(new Dimension(100, 100));
-        panel2.setSize(new Dimension(100, 100));
-        panel3.setSize(new Dimension(100, 100));
-        panel1.setBackground(Color.BLUE);
+        panelGauche.setPreferredSize(new Dimension(TAILLE_FENETRE.width/2, TAILLE_FENETRE.height));
+        panelDroite.setPreferredSize(new Dimension(TAILLE_FENETRE.width/2, TAILLE_FENETRE.height));
+        panel2.setPreferredSize(new Dimension(TAILLE_FENETRE.width/2, TAILLE_FENETRE.height/2));
+        panel3.setPreferredSize(new Dimension(TAILLE_FENETRE.width/2, TAILLE_FENETRE.height/2));
+        panelGauche.setBackground(Color.BLUE);
         panel2.setBackground(Color.RED);
         panel3.setBackground(Color.GREEN);
-        panel1.setVisible(true);
+
+        panelDroite.setVisible(true);
+        panelGauche.setVisible(true);
         panel2.setVisible(true);
         panel3.setVisible(true);
 
-        this.add(panel1, BorderLayout.NORTH);
-        this.add(panel2, BorderLayout.CENTER);
-        this.add(panel3, BorderLayout.SOUTH);
+        panelDroite.add(panel2, BorderLayout.NORTH);
+        panelDroite.add(panel3, BorderLayout.SOUTH);
+
+        this.add(panelGauche, BorderLayout.WEST);
+        this.add(panelDroite, BorderLayout.EAST);
+
 
         setVisible(true);
 

@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f9e783b-58e7-430e-a15e-7d9680f376d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controller/IPPCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/DeserializeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/DeserializeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ImageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ImageCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoadCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/PerspectiveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PerspectiveCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/SerializeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SerializeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/TranslateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TranslateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ZoomCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ZoomCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Image.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/ImagePerspectivePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/ImagePerspectivePackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Perspective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Perspective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/program/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ImageWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LOG121Lab3/view/MainPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LOG121Lab3/view/MainPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +35,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LOG121Lab2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Documents/ÉTS/hiver19-cursus-deuxieme_session/prog-inf111/java/projets_eclipse/Equipe19_TP2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -107,6 +91,7 @@
       <workItem from="1584807185380" duration="637000" />
       <workItem from="1585238129258" duration="15279000" />
       <workItem from="1585258550821" duration="71000" />
+      <workItem from="1585318111854" duration="4011000" />
     </task>
     <servers />
   </component>
@@ -122,22 +107,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1585255500456" />
-    <state width="1323" height="159" key="GridCell.Tab.0.bottom" timestamp="1585258451472">
+    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1585322747554">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="159" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585258451472" />
-    <state width="1323" height="159" key="GridCell.Tab.0.center" timestamp="1585258451472">
+    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585322747554" />
+    <state width="1323" height="159" key="GridCell.Tab.0.bottom" timestamp="1585321942751">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="159" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1585258451472" />
-    <state width="1323" height="159" key="GridCell.Tab.0.left" timestamp="1585258451471">
+    <state width="1323" height="159" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585321942751" />
+    <state width="1323" height="159" key="GridCell.Tab.0.center" timestamp="1585321942751">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="159" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1585258451471" />
-    <state width="1323" height="159" key="GridCell.Tab.0.right" timestamp="1585258451472">
+    <state width="1323" height="159" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1585321942751" />
+    <state width="1323" height="159" key="GridCell.Tab.0.left" timestamp="1585321942751">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="159" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1585258451472" />
+    <state width="1323" height="159" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1585321942751" />
+    <state width="1323" height="159" key="GridCell.Tab.0.right" timestamp="1585321942751">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="159" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1585321942751" />
     <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1585258552008">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
