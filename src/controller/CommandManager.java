@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CommandManager {
 
-    private static CommandManager mngr = getInstance();
+    private static CommandManager mngr = new CommandManager();
     private ArrayList undoCommands = new ArrayList<PerspectiveCommand>();
     private ArrayList redoCommands = new ArrayList<PerspectiveCommand>();
 

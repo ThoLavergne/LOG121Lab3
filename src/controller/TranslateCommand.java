@@ -10,7 +10,7 @@ public class TranslateCommand extends PerspectiveCommand {
 
     }*/
 
-    protected void execute(ActionEvent actionEvent){
+    public void execute(ActionEvent e){
 
     }
 }

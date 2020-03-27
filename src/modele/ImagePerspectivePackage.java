@@ -4,11 +4,29 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ImagePerspectivePackage {
+    private static int NB_PERSPECTIVES = 3;
 
-    Image image;
-    ArrayList<Perspective> perspectives;
+    //Singleton
+    private static ImagePerspectivePackage ipp = new ImagePerspectivePackage(NB_PERSPECTIVES);
+
+    java.awt.Image image = null;
+    ArrayList<Perspective> perspectives = new ArrayList<Perspective>();
+    boolean imageLoaded = false;
 
 
+    //Constructeur privé
+    private ImagePerspectivePackage(int nbPerspectives){
+
+        //On cree le nb de perspectives spécifié
+        for (int i = 0; i < nbPerspectives; i++){
+            perspectives.add(new Perspective());
+        }
+    }
+
+    /**
+     * Méthode qui sérialize cet objet et le sauvegarde dans le path en parametre
+     * @param path
+     */
     public void serialize(String path){
         try {
             FileOutputStream fileOut =
@@ -23,6 +41,10 @@ public class ImagePerspectivePackage {
         }
     }
 
+    /**
+     * Méthode qui desérialize l'objet sauvegarde dans le path en parametre
+     * @param path
+     */
     public void deserialize(String path){
         ImagePerspectivePackage i = null;
         try {
@@ -42,12 +64,13 @@ public class ImagePerspectivePackage {
     }
 
     //Accesseurs et mutateurs
-    public Image getImage(){
+    public java.awt.Image getImage(){
         return this.image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(java.awt.Image image) {
         this.image = image;
+        imageLoaded = true;
     }
 
     public ArrayList<Perspective> getPerspectives(){
@@ -56,5 +79,24 @@ public class ImagePerspectivePackage {
 
     public void setPerspectives(ArrayList<Perspective> perspectives) {
         this.perspectives = (ArrayList<Perspective>) perspectives.clone();
+    }
+
+    public boolean isImageLoaded() {
+        return imageLoaded;
+    }
+
+    public void setImageLoaded(boolean imageLoaded){
+        this.imageLoaded = imageLoaded;
+    }
+
+    //Accesseur du singleton
+    public static ImagePerspectivePackage getInstance(){
+        return ipp;
+    }
+
+    //Accesseur d'une perspective en particulier selon l'index
+    public Perspective getPerspective(int index){
+        ArrayList<Perspective> perspectives = (ArrayList<Perspective>) this.perspectives.clone();
+        return perspectives.get(index);
     }
 }
