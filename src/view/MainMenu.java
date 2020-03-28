@@ -2,6 +2,7 @@ package view;
 
 import controller.ImageCommand;
 import controller.LoadCommand;
+import modele.ImagePerspectivePackage;
 import org.w3c.dom.*;
 
 import javax.imageio.ImageIO;
@@ -24,7 +25,7 @@ public class MainMenu extends JMenuBar {
      */
     private static final String MENU_FILE_TITLE = "File";
     private static final String MENU_FILE_OPEN_IMAGE = "Open Image";
-    private static final String MENU_FILE_OPEN_FILE = "Save";
+    private static final String MENU_FILE_OPEN_FILE = "Open File";
     private static final String MENU_FILE_SAVE = "Save";
     private static final String MENU_COMMAND_TITLE = "Commands";
     private static final String MENU_COMMAND_TRANSLATE = "Translate";
@@ -34,8 +35,9 @@ public class MainMenu extends JMenuBar {
     private static final String MENU_FILE_EXIT = "Close";
     private static final String MENU_HELP_TITLE = "Help";
     private static final String MENU_HELP_ABOUT = "About";
-
-    public MainMenu() {
+    private MainWindow parent;
+    public MainMenu(MainWindow parent) {
+        this.parent = parent;
         ajouterMenuFichier();
         addMenuCommands();
         ajouterMenuAide();
@@ -47,6 +49,8 @@ public class MainMenu extends JMenuBar {
         JMenuItem menuChargerFichier = new JMenuItem(MENU_FILE_OPEN_FILE);
         JMenuItem menuSave = new JMenuItem(MENU_FILE_SAVE);
         JMenuItem menuQuitter = new JMenuItem(MENU_FILE_EXIT);
+
+        ImagePerspectivePackage perspectivePackage = ImagePerspectivePackage.getInstance();
 
         menuChargerImage.addActionListener((ActionEvent e) -> {
             JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -68,15 +72,20 @@ public class MainMenu extends JMenuBar {
                     } catch (IOException i) {
                         i.printStackTrace();
                     }
-
+                    System.out.println("Appel de la LoadCommand");
                     //Appel de la LoadCommand
                     ImageCommand ic = new LoadCommand();
                     ic.execute(img);
-
+                    System.out.println("Loadcommand executée");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
+
+            firePropertyChange("New Image",null,"New Image");
+//            MainPanel mainPanel = new MainPanel();
+//            System.out.println(this.parent);
+//            this.parent.add(mainPanel);
         });
 
         menuQuitter.addActionListener((ActionEvent e) -> {
@@ -84,14 +93,14 @@ public class MainMenu extends JMenuBar {
         });
 
         menuChargerFichier.addActionListener((ActionEvent e) ->  {// TODO DeSerialization
-
+          //  perspectivePackage.deserialize();
         });
 
         /**
          * Save actual picture
          */
         menuSave.addActionListener((ActionEvent e) ->  {// TODO Serialization
-
+       //     perspectivePackage.serialize();
         });
         menuFichier.add(menuSave);
         menuFichier.add(menuChargerImage);
@@ -100,8 +109,17 @@ public class MainMenu extends JMenuBar {
 
         add(menuFichier);
 
+      // this.getParent().add()
     }
 
+    /**
+     * Méthode pour récupérer un fichier : ajouter moyen de choisir entre image et fichier afin de différencier les deux.
+     * @return path
+     */
+    public String openFile(){
+        return null;
+
+    }
     /**
      * Add commands Menu
      */
@@ -143,5 +161,9 @@ public class MainMenu extends JMenuBar {
                             + "<p>&Eacute;cole de technologie sup&eacute;rieure</p></html>");
         });
         add(menuAide);
+    }
+
+    private void addCommandKeyboard(){
+
     }
 }

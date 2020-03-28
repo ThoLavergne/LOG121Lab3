@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements PropertyChangeListener {
     /**
      * Code inspiré de la classe FenetrePrincipale du laboratoire 1 en LOG121.
      */
@@ -16,7 +18,7 @@ public class MainWindow extends JFrame {
     private static final String TITRE_FENETRE = "Laboratoire 3 : LOG121 - Application de modification de perspective";
     public MainWindow(){
         MainPanel mainPanel = new MainPanel();
-        MainMenu mainMenu = new MainMenu();
+        MainMenu mainMenu = new MainMenu(this);
         this.add(mainPanel);
         this.add(mainMenu, BorderLayout.NORTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,7 +28,12 @@ public class MainWindow extends JFrame {
         setVisible(true);
         //setLocationRelativeTo(null);
         setResizable(true);
+        mainMenu.addPropertyChangeListener(this);
 
-
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        repaint();
+        System.out.println(evt.getNewValue());
     }
 }
