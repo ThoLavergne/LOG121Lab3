@@ -1,16 +1,23 @@
 package controller;
 
+import modele.Perspective;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TranslateCommand extends PerspectiveCommand {
+public abstract class TranslateCommand extends PerspectiveCommand {
 
-    /*@Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    private static int INCREMENT_TRANSLATION = 5;
 
-    }*/
+    protected int incrementTranslation = INCREMENT_TRANSLATION;
 
-    public void execute(ActionEvent e){
-
+    public TranslateCommand(Perspective p) {
+        super(p);
     }
+
+    @Override
+    public abstract void executeAction();
+
+    @Override
+    public abstract void actionPerformed(ActionEvent e);
 }

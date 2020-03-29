@@ -47,7 +47,12 @@ public class Memento {
     }
 
     public Memento getBacktrack(){
-        return this.backtrack.copy();
+        if(this.backtrack!=null){
+            return this.backtrack.copy();
+        }
+        else{
+            return null;
+        }
     }
 
     //Methode retournant une copie du memento

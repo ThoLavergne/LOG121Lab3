@@ -1,7 +1,6 @@
 package view;
 
-import controller.ImageCommand;
-import controller.LoadCommand;
+import controller.*;
 import modele.ImagePerspectivePackage;
 import org.w3c.dom.*;
 
@@ -102,6 +101,7 @@ public class MainMenu extends JMenuBar {
         menuSave.addActionListener((ActionEvent e) ->  {// TODO Serialization
        //     perspectivePackage.serialize();
         });
+
         menuFichier.add(menuSave);
         menuFichier.add(menuChargerImage);
         menuFichier.add(menuChargerFichier);
@@ -125,20 +125,10 @@ public class MainMenu extends JMenuBar {
      */
     private void addMenuCommands() {
         JMenu menuCommands = new JMenu(MENU_COMMAND_TITLE);
-        JMenuItem commandsTranslate = new JMenuItem(MENU_COMMAND_TRANSLATE);
-        JMenuItem commandsZoom = new JMenuItem(MENU__COMMAND_ZOOM);
         JMenuItem commandsUndo = new JMenuItem(MENU_COMMAND_UNDO);
         JMenuItem commandsRedo = new JMenuItem(MENU_COMMAND_REDO);
-        commandsTranslate.addActionListener((ActionEvent e) -> { //TODO
-        });
-        commandsZoom.addActionListener((ActionEvent e) -> { //TODO
-        });
-        commandsUndo.addActionListener((ActionEvent e) -> { //TODO
-        });
-        commandsRedo.addActionListener((ActionEvent e) -> { //TODO
-        });
-        menuCommands.add(commandsTranslate);
-        menuCommands.add(commandsZoom);
+        commandsUndo.addActionListener(new UndoCommand());
+        commandsRedo.addActionListener(new RedoCommand());
         menuCommands.add(commandsUndo);
         menuCommands.add(commandsRedo);
 

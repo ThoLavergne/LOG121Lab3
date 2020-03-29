@@ -13,23 +13,34 @@ public abstract class PerspectiveCommand extends AbstractAction {
     faire soit un redo ou undo ensuite*/
     private Memento undoMemento;
     private Memento redoMemento;
-    private Perspective p;
+    protected Perspective p;
 
+
+    //Constructeur
+    public PerspectiveCommand(Perspective p){
+        this.p = p;
+    }
 
     //Cette méthode sert de méthode template, appelé losqu'un évènement écouté par une PerspectiveCommand arrive
-    @Override
-    public final void actionPerformed(ActionEvent actionEvent){
+    public final void execute(){
 
         //On ajoute la commande a la liste de celles qu'on peut defaire
         CommandManager mngr = CommandManager.getInstance();
         mngr.addToUndo(this);
 
-        Memento backtrack = this.undoMemento.copy();
+        Memento backtrack = null;
+        if(this.undoMemento!= null){
+            backtrack = this.undoMemento.copy();
+        }
+
         this.undoMemento = p.getMemento();
-        this.undoMemento.setBacktrack(backtrack);
+
+        if(backtrack != null){
+            this.undoMemento.setBacktrack(backtrack);
+        }
 
         //On execute l'action concrete
-        execute(actionEvent);
+        executeAction();
     };
 
     /**
@@ -37,19 +48,27 @@ public abstract class PerspectiveCommand extends AbstractAction {
      */
     public void undo(){
 
-        Memento backtrack = this.redoMemento.copy();
+        Memento backtrack = null;
+        if(this.redoMemento!=null){
+            backtrack = this.redoMemento.copy();
+        }
 
         //l'état actuel de la perspective est sauvée dans le redo memento
         this.redoMemento = p.getMemento();
 
         //on sauvegarde le redomemento precedent dans le backtrack du redoMemento
-        this.redoMemento.setBacktrack(backtrack);
+        if(backtrack!=null){
+            this.redoMemento.setBacktrack(backtrack);
+        }
 
         //la perspective est modifiée pour etre identique au courant undo memento
         p.setMemento(this.undoMemento);
 
         //Le undo memento devient son memento precedent
-        this.undoMemento = this.undoMemento.getBacktrack();
+        if(undoMemento.getBacktrack()!=null){
+            this.undoMemento = this.undoMemento.getBacktrack();
+        }
+
     }
 
     /**
@@ -57,22 +76,30 @@ public abstract class PerspectiveCommand extends AbstractAction {
      */
     public void redo(){
 
-        Memento backtrack = this.undoMemento.copy();
+        Memento backtrack = null;
+        if(this.undoMemento!=null){
+            backtrack = this.undoMemento.copy();
+        }
 
         //l'état actuel de la perspective est sauvée dans le undo memento
         this.undoMemento = p.getMemento();
 
+        if(backtrack!=null){
+            this.undoMemento.setBacktrack(backtrack);
+        }
         //on sauvegarde le redomemento precedent dans le backtrack du redoMemento
-        this.undoMemento.setBacktrack(backtrack);
 
         //la perspective est modifiée pour etre identique au courant redo memento
         p.setMemento(this.redoMemento);
 
-        //Le undo memento devient son memento precedent
-        this.redoMemento = this.redoMemento.getBacktrack();
+        //Le redo memento devient son memento precedent
+        if(redoMemento.getBacktrack()!=null){
+            this.redoMemento = this.redoMemento.getBacktrack();
+        }
 
     }
 
-    public abstract void execute(ActionEvent e);
+    public abstract void executeAction();
+    public abstract void actionPerformed(ActionEvent e);
 
 }

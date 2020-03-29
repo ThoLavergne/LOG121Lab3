@@ -1,16 +1,23 @@
 package controller;
 
+import modele.Perspective;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ZoomCommand extends PerspectiveCommand{
+public abstract class ZoomCommand extends PerspectiveCommand{
 
-    /*@Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    private static double INCREMENT_ZOOM = 0.05D;
 
-    }*/
+    protected double incrementZoom = INCREMENT_ZOOM;
 
-    public void execute(ActionEvent e){
-
+    public ZoomCommand(Perspective p) {
+        super(p);
     }
+
+    @Override
+    public abstract void executeAction();
+
+    @Override
+    public abstract void actionPerformed(ActionEvent e);
 }

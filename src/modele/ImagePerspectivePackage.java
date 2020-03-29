@@ -21,6 +21,8 @@ public class ImagePerspectivePackage {
         for (int i = 0; i < nbPerspectives; i++){
             perspectives.add(new Perspective());
         }
+
+        System.out.println("TESTT");
     }
 
     /**
@@ -71,6 +73,12 @@ public class ImagePerspectivePackage {
     public void setImage(java.awt.Image image) {
         this.image = image;
         imageLoaded = true;
+
+        for(Perspective p: perspectives){
+            p.notifyObservers();
+        }
+
+        System.out.println("YEP");
     }
 
     public ArrayList<Perspective> getPerspectives(){

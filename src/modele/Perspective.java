@@ -65,6 +65,14 @@ public class Perspective implements MyObservable {
         this.translation = translation;
     }
 
+    public int getX(){
+        return this.translation.x;
+    }
+
+    public int getY(){
+        return this.translation.y;
+    }
+
     //Méthode qui retourne le memento de cette perspective
     public Memento getMemento(){
         return new Memento(this);
@@ -74,6 +82,48 @@ public class Perspective implements MyObservable {
     public void setMemento(Memento mem){
         this.zoom = mem.getZoomMemorized();
         this.translation = (Point) mem.getTranslationMemorized().clone();
+        System.out.println("Memento: \n Zoom: "+zoom );
+        notifyObservers();
+    }
+
+    //Méthodes de zoom
+    public void zoomIn(double increment){
+        this.zoom += increment;
+        System.out.println("Zoom In: "+ zoom);
+        notifyObservers();
+
+    }
+
+    public void zoomOut(double increment){
+        this.zoom -= increment;
+        System.out.println("Zoom Out: "+ zoom);
+        notifyObservers();
+    }
+
+    //Méthodes de translation
+
+    public void moveLeft(int increment){
+        this.translation.translate(-increment, 0);
+        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
+        notifyObservers();
+    }
+
+    public void moveRight(int increment){
+        this.translation.translate(increment, 0);
+        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
+        notifyObservers();
+    }
+
+    public void moveUp(int increment){
+        this.translation.translate(0, -increment);
+        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
+        notifyObservers();
+    }
+
+    public void moveDown(int increment){
+        this.translation.translate(0, increment);
+        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
+        notifyObservers();
     }
 
 }

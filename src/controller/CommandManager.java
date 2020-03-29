@@ -41,6 +41,14 @@ public class CommandManager {
         return redoCommands.isEmpty();
     }
 
+    //TEST
+    public int getRedoLenght(){
+        return redoCommands.size();
+    }
+
+    public int getUndoLenght(){
+        return undoCommands.size();
+    }
 
 
 }
