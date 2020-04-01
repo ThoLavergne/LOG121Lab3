@@ -5,9 +5,10 @@ import observer.MyObservable;
 import observer.MyObserver;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Perspective implements MyObservable {
+public class Perspective implements MyObservable, Serializable {
 
     private double zoom = 1;
     private Point translation = new Point(0,0);
@@ -101,29 +102,11 @@ public class Perspective implements MyObservable {
     }
 
     //Méthodes de translation
-
-    public void moveLeft(int increment){
-        this.translation.translate(-increment, 0);
-        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
+    public void move(int x, int y){
+        this.translation.translate(x,y);
+        System.out.println("X: "+ translation.x+ "*** Y: "+ translation.y);
         notifyObservers();
     }
 
-    public void moveRight(int increment){
-        this.translation.translate(increment, 0);
-        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
-        notifyObservers();
-    }
-
-    public void moveUp(int increment){
-        this.translation.translate(0, -increment);
-        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
-        notifyObservers();
-    }
-
-    public void moveDown(int increment){
-        this.translation.translate(0, increment);
-        System.out.print("X: "+ translation.x+ "*** Y: "+ translation.y);
-        notifyObservers();
-    }
 
 }

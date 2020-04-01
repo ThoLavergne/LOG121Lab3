@@ -4,21 +4,21 @@ import modele.Perspective;
 
 import java.awt.event.ActionEvent;
 
-public class TranslateLeftCommand extends TranslateCommand{
+public class TranslateFreeCommand extends TranslateCommand {
 
-    public TranslateLeftCommand(Perspective p) {
+    int x , y ;
+    public TranslateFreeCommand(Perspective p,int x, int y){
         super(p);
+        this.x = x;
+        this.y = y;
     }
-
     @Override
     public void executeAction() {
-        p.moveLeft(incrementTranslation);
+        p.move(x,y);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        p.moveLeft(incrementTranslation);
+        p.move(x,y);
     }
-
-
 }

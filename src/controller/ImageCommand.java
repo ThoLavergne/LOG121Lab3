@@ -3,6 +3,6 @@ package controller;
 
 public abstract class ImageCommand {
 
-    public abstract void execute(java.awt.Image img);
+    public abstract void execute(java.awt.Image img,String path);
 
 }

@@ -11,6 +11,8 @@ import javax.swing.filechooser.FileSystemView;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,9 +36,8 @@ public class MainMenu extends JMenuBar {
     private static final String MENU_FILE_EXIT = "Close";
     private static final String MENU_HELP_TITLE = "Help";
     private static final String MENU_HELP_ABOUT = "About";
-    private MainWindow parent;
-    public MainMenu(MainWindow parent) {
-        this.parent = parent;
+
+    public MainMenu() {
         ajouterMenuFichier();
         addMenuCommands();
         ajouterMenuAide();
@@ -74,8 +75,7 @@ public class MainMenu extends JMenuBar {
                     System.out.println("Appel de la LoadCommand");
                     //Appel de la LoadCommand
                     ImageCommand ic = new LoadCommand();
-                    ic.execute(img);
-                    System.out.println("Loadcommand executée");
+                    ic.execute(img, selectedFile.getAbsolutePath());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -92,14 +92,16 @@ public class MainMenu extends JMenuBar {
         });
 
         menuChargerFichier.addActionListener((ActionEvent e) ->  {// TODO DeSerialization
-          //  perspectivePackage.deserialize();
+          IPPCommand command = new DeserializeCommand();
+          command.execute();
         });
 
         /**
          * Save actual picture
          */
         menuSave.addActionListener((ActionEvent e) ->  {// TODO Serialization
-       //     perspectivePackage.serialize();
+           IPPCommand command = new SerializeCommand();
+           command.execute();
         });
 
         menuFichier.add(menuSave);

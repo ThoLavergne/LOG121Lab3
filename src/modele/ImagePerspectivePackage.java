@@ -1,17 +1,21 @@
 package modele;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ImagePerspectivePackage {
+public class ImagePerspectivePackage implements Serializable{
     private static int NB_PERSPECTIVES = 3;
 
     //Singleton
     private static ImagePerspectivePackage ipp = new ImagePerspectivePackage(NB_PERSPECTIVES);
 
-    java.awt.Image image = null;
-    ArrayList<Perspective> perspectives = new ArrayList<Perspective>();
-    boolean imageLoaded = false;
+    private transient java.awt.Image image = null;
+    private String pathImage;
+    private ArrayList<Perspective> perspectives = new ArrayList<>();
+    private boolean imageLoaded = false;
 
 
     //Constructeur privé
@@ -34,7 +38,7 @@ public class ImagePerspectivePackage {
             FileOutputStream fileOut =
                     new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(this);
+            out.writeObject(this.getInstance());
             out.close();
             fileOut.close();
             System.out.printf("Serialized data is saved in" + path);
@@ -55,8 +59,13 @@ public class ImagePerspectivePackage {
             i = (ImagePerspectivePackage) in.readObject();
             in.close();
             fileIn.close();
-            this.image = i.getImage();
-            this.perspectives = i.getPerspectives();
+            this.setPathImage(i.getPathImage());
+            System.out.println(this.getPathImage());
+
+            this.setPerspectives(i.getPerspectives());
+            ImageIcon imageIcon = new ImageIcon(i.getPathImage());
+            this.setImage(imageIcon.getImage());
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException c) {
@@ -72,9 +81,9 @@ public class ImagePerspectivePackage {
 
     public void setImage(java.awt.Image image) {
         this.image = image;
-        imageLoaded = true;
+        this.imageLoaded = true;
 
-        for(Perspective p: perspectives){
+        for(Perspective p: this.perspectives){
             p.notifyObservers();
         }
 
@@ -107,4 +116,15 @@ public class ImagePerspectivePackage {
         ArrayList<Perspective> perspectives = (ArrayList<Perspective>) this.perspectives.clone();
         return perspectives.get(index);
     }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
+
+
 }

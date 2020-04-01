@@ -21,7 +21,7 @@ public class MainWindow extends JFrame/* implements PropertyChangeListener */{
 
     public MainWindow(){
         MainPanel mainPanel = new MainPanel();
-        MainMenu mainMenu = new MainMenu(this);
+        MainMenu mainMenu = new MainMenu();
         this.add(mainPanel);
         this.add(mainMenu, BorderLayout.NORTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,12 +31,7 @@ public class MainWindow extends JFrame/* implements PropertyChangeListener */{
         setVisible(true);
         //setLocationRelativeTo(null);
         setResizable(true);
-        //mainMenu.addPropertyChangeListener(this);
 
     }
-    /*@Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        repaint();
-        System.out.println(evt.getNewValue());
-    }*/
+
 }

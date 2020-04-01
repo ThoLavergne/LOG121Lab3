@@ -7,9 +7,7 @@ import observer.MyObserver;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseWheelEvent;
+import java.awt.event.*;
 
 import static view.MainWindow.BUFFER;
 import static view.MainWindow.TAILLE_FENETRE;
@@ -25,7 +23,8 @@ public class DualPanel extends JPanel {
     ImagePanel imagePanel;
     JPanel buttonPanel;
     Perspective p;
-
+    Point mousePoint, origine;
+    int dx, dy;
     //Constructeur
     public DualPanel(boolean dynamic, boolean big){
 
@@ -68,7 +67,6 @@ public class DualPanel extends JPanel {
         JButton translateDown = new JButton("DOWN");
         JButton translateLeft = new JButton("LEFT");
         JButton translateRight = new JButton("RIGHT");
-
         //Listeners sur les boutons
         zoomIn.addActionListener((ActionEvent e) -> {
             PerspectiveCommand c = new ZoomInCommand(this.p);
@@ -78,20 +76,24 @@ public class DualPanel extends JPanel {
             PerspectiveCommand c = new ZoomOutCommand(this.p);
             c.execute();
         });
+
         translateUp.addActionListener((ActionEvent e)-> {
-            PerspectiveCommand c = new TranslateUpCommand(this.p);
+
+
+            PerspectiveCommand c = new TranslateFreeCommand(this.p, 0,-5);
             c.execute();
         });
+
         translateLeft.addActionListener((ActionEvent e)-> {
-            PerspectiveCommand c = new TranslateLeftCommand(this.p);
+            PerspectiveCommand c = new TranslateFreeCommand(this.p, -5,0);
             c.execute();
         });
         translateRight.addActionListener((ActionEvent e)-> {
-            PerspectiveCommand c = new TranslateRightCommand(this.p);
+            PerspectiveCommand c = new TranslateFreeCommand(this.p,5,0);
             c.execute();
         });
         translateDown.addActionListener((ActionEvent e)-> {
-            PerspectiveCommand c = new TranslateDownCommand(this.p);
+            PerspectiveCommand c = new TranslateFreeCommand(this.p,0,5);
             c.execute();
         });
 
@@ -105,7 +107,6 @@ public class DualPanel extends JPanel {
         buttonPanel.add(translateUp);
         buttonPanel.add(translateDown);
         buttonPanel.add(translateRight);
-
 
         if(big){
             imagePanel.setPreferredSize(new Dimension(PANEL_WIDTH, BIG_DYNAMIC_IMAGE_HEIGHT));
@@ -127,6 +128,39 @@ public class DualPanel extends JPanel {
                     c.execute();
                 }
             }
+        });
+
+        imagePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                mousePoint = e.getPoint();
+                origine = new Point(e.getX(),e.getY());
+                repaint();
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                p.move(-dx,-dy);
+                PerspectiveCommand c = new TranslateFreeCommand(p,dx,dy);
+                c.execute();
+                mousePoint = e.getPoint();
+                repaint();
+                dx = dy = 0;
+            }
+        });
+
+        imagePanel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+                 dx += e.getX() - mousePoint.x;
+                 dy += e.getY() - mousePoint.y;
+
+                p.move(e.getX() - mousePoint.x,e.getY() - mousePoint.y);
+                mousePoint = e.getPoint();
+                repaint();
+
+            }
+
         });
 
         //TODO- Ajouter un Listener qui envoie des translate command selon le drag
