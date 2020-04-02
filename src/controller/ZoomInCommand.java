@@ -14,9 +14,4 @@ public class ZoomInCommand extends ZoomCommand {
     public void executeAction() {
         p.zoomIn(incrementZoom);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        p.zoomIn(incrementZoom);
-    }
 }

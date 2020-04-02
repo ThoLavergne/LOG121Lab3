@@ -13,15 +13,17 @@ public class ImagePanel extends JPanel implements MyObserver {
 
     Perspective p;
 
-    public ImagePanel(){
-        System.out.println("ImagePanel cree");
-    }
-
     //Mutateur pour la perspective et ajout du panel en tant qu'observateur
     protected void setPerspective(Perspective p){
         this.p = p;
         p.addObserver(this);
     }
+
+    /**Méthode de dessin du panel
+     Inspiré de http://www.java2s.com/Tutorial/Java/0261__2D-Graphics/CreatingaImageZoomerusingGraphics2D.htm?fbclid=IwAR3H0XkaU_pOumKDNQK8ZnWk0o_uJ4OUuJUfoHVft499EXsNoQh_f14OVcA
+     et de http://www.java2s.com/Tutorial/Java/0261__2D-Graphics/TranslatingaDrawnImage.htm?fbclid=IwAR241Z8s8-yG2od6n7G_T7ukHwBNkl0tpw_I-ZULeOk7k0Zueej5d_9MuHc
+     *
+     */
 
     @Override
     public void paint(Graphics g){
@@ -38,10 +40,6 @@ public class ImagePanel extends JPanel implements MyObserver {
             int x = p.getX();
             int y = p.getY();
 
-            /*AffineTransform t = new AffineTransform();
-            t.translate(x, y);
-
-            g2D.setTransform(t);*/
             g2D.scale(zoom, zoom);
             g2D.drawImage(image,x,y,this);
 
@@ -49,32 +47,9 @@ public class ImagePanel extends JPanel implements MyObserver {
     }
 
 
-
-
-
-    /**
-     * Méthode qui reçoit un engin graphique, une image et 2 coordonnées de position x et y, et dessine une image
-     * centrée en x et y. Il est nécessaire de faire le décalage pour centrer l'image car le méthode drawImage dessine
-     * le coin superieur gauche de chaque image à la position (x,y) spécifiée
-     *
-     * @param g, l'engin Graphics
-     * @param img, l'image
-     * @param positionX, la position en x à laquelle on veut centrer l'image
-     * @param positionY, la position en x à laquelle on veut centrer l'image
-     */
-    private void drawCenteredImage(Graphics g, Image img, int positionX, int positionY){
-
-        //recuperer les decalages necessaire
-        int decalageX = img.getWidth(null)/2;
-        int decalageY = img.getHeight(null)/2;
-
-        //dessiner l'image centree
-        g.drawImage(img, positionX-decalageX, positionY-decalageY, null);
-    }
-
+    //On repaint le panel lors de la mise à jour de clenchée par la perspective
     @Override
     public void update() {
         repaint();
-        System.out.println("updated");
     }
 }

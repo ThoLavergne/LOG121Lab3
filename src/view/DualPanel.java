@@ -23,7 +23,7 @@ public class DualPanel extends JPanel {
     ImagePanel imagePanel;
     JPanel buttonPanel;
     Perspective p;
-    Point mousePoint, origine;
+    Point mousePoint;
     int dx, dy;
     //Constructeur
     public DualPanel(boolean dynamic, boolean big){
@@ -57,7 +57,6 @@ public class DualPanel extends JPanel {
      */
     private void panelIsDynamic(boolean big){
 
-        System.out.println("Panel dynamique");
         imagePanel = new ImagePanel();
         buttonPanel = new JPanel();
 
@@ -78,8 +77,6 @@ public class DualPanel extends JPanel {
         });
 
         translateUp.addActionListener((ActionEvent e)-> {
-
-
             PerspectiveCommand c = new TranslateFreeCommand(this.p, 0,-5);
             c.execute();
         });
@@ -130,41 +127,43 @@ public class DualPanel extends JPanel {
             }
         });
 
+        //Translation avec la souris
+        //La commande est seulement exécutée et enregistrée quand on relâche la souris
         imagePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 mousePoint = e.getPoint();
-                origine = new Point(e.getX(),e.getY());
-                repaint();
             }
             @Override
             public void mouseReleased(MouseEvent e) {
+                //remise de la position de la perspective à sa position avant le clic
                 p.move(-dx,-dy);
+                //commande unique qui enregistre le déplacement total de l'image
                 PerspectiveCommand c = new TranslateFreeCommand(p,dx,dy);
                 c.execute();
                 mousePoint = e.getPoint();
-                repaint();
                 dx = dy = 0;
             }
         });
 
+        //Listener qui fait que l'image bouge en même temps que la souris en temps réel
         imagePanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
 
+                //on incrémente le changement de position de la difference entre la position du clic initial et actuelle
+                //de la souris
                  dx += e.getX() - mousePoint.x;
                  dy += e.getY() - mousePoint.y;
 
+                 //mouvement dynamique de la perspective...on n'enregistre pas ce mouvement libre à travers une commande
                 p.move(e.getX() - mousePoint.x,e.getY() - mousePoint.y);
                 mousePoint = e.getPoint();
-                repaint();
 
             }
 
         });
 
-        //TODO- Ajouter un Listener qui envoie des translate command selon le drag
-        //imagePanel.addXYZlistener
 
         add(buttonPanel, BorderLayout.NORTH);
         add(imagePanel, BorderLayout.SOUTH);
@@ -185,9 +184,6 @@ public class DualPanel extends JPanel {
 
         imagePanel.setPreferredSize(new Dimension(PANEL_WIDTH, STATIC_IMAGE_HEIGHT));
 
-        //Border blackline = BorderFactory.createLineBorder(Color.black,5);
-
-        //imagePanel.setBorder(blackline);
 
         add(imagePanel);
 

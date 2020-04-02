@@ -4,81 +4,159 @@ title __LOG121LAB3's Class Diagram__\n
 
   namespace controller {
     class controller.CommandManager {
-    - commands : ArrayList
-            {static} - mngr : CommandManager
+    {static} - mngr : CommandManager
+            - redoCommands : ArrayList
+            - undoCommands : ArrayList
+            + addToRedo()
+            + addToUndo()
             {static} + getInstance()
-            + redo()
-            + undo()
-            + reverse()
     }
   }
   
 
   namespace controller {
-    abstract class controller.PerspectiveCommand {
-        -receiver : Perspective
-        {abstract} +execute()
+      abstract class controller.IPPCommand {
+          + actionPerformed()
+          {abstract} + executeAction()
+      }
     }
-  }
 
-  namespace controller {
-      class controller.DeserializeCommand {
 
-        +execute()
+    namespace controller {
+      abstract class controller.ImageCommand {
+          {abstract} + executeAction(java.awt.Image img,String path)
+      }
+    }
+
+
+    namespace controller {
+      class controller.LoadCommand {
+          + executeAction(java.awt.Image img,String path)
+      }
+    }
+
+
+    namespace controller {
+      abstract class controller.PerspectiveCommand {
+          -undoMemento: Memento
+          -redoMemento: Memento
+          + actionPerformed()
+          + execute()
+          + redo()
+          + undo()
+          {abstract} + executeAction()
+      }
+    }
+
+
+    namespace controller {
+      class controller.RedoCommand {
+          + actionPerformed()
+      }
+    }
+
+
+    namespace controller {
+      class controller.SerializeCommand {
+          + executeAction()
       }
     }
 
     namespace controller {
-          class controller.SerializeCommand {
-
-            +execute()
+          class controller.DeserializeCommand {
+              + executeAction()
           }
-     }
-  
+        }
 
-  namespace controller {
-    class controller.TranslateCommand {
-        +execute()
+
+    namespace controller {
+      abstract class controller.TranslateCommand {
+          # incrementTranslation : int
+          {abstract} + executeAction()
+      }
     }
-  }
 
-  namespace controller {
-      abstract class controller.ImageCommand {
-      -subject : ImageManager
-          +execute()
+
+    namespace controller {
+      class controller.TranslateFreeCommand {
+          ~ x : int
+          ~ y : int
+          + executeAction()
+      }
+    }
+
+
+    namespace controller {
+      class controller.UndoCommand {
+          + actionPerformed()
+      }
+    }
+
+
+    namespace controller {
+      abstract class controller.ZoomCommand {
+          # incrementZoom : double
+          {abstract} + executeAction()
+      }
+    }
+
+
+    namespace controller {
+      class controller.ZoomInCommand {
+          + executeAction()
+      }
+    }
+
+
+    namespace controller {
+      class controller.ZoomOutCommand {
+          + executeAction()
       }
     }
   
 
-  namespace controller {
-    class controller.ZoomCommand {
-        +execute()
+  namespace memento {
+    class memento.Memento {
+        - translationMemorized : Point
+        - zoomMemorized : double
     }
   }
   
 
   namespace modele {
-    class modele.ImageManager {
-            - loadPerspectives()
-            + loadImage()
-            +save()
-            +openFromFile
+      class modele.ImagePerspectivePackage {
+          {static} - NB_PERSPECTIVES : int
+          {static} - ipp : ImagePerspectivePackage
+          - image : Image
+          - imageLoaded : boolean
+          - observers : ArrayList<MyObserver>
+          - pathImage : String
+          - perspectives : ArrayList<Perspective>
+         {static} + getInstance()
+          + deserialize()
+          + serialize()
+          + getImage()
+          + getPerspectives()
+
+      }
     }
-  }
+
+
+    namespace modele {
+      class modele.Perspective {
+          - observers : ArrayList<MyObserver>
+          - translation : Point
+          - zoom : double
+          + move()
+          + zoomIn()
+          + zoomOut()
+          + setMemento()
+          + getMemento()
+      }
+    }
   
 
-  namespace modele {
-    class modele.Perspective {
-    - image : ImageIO
-    - zoom : double
-    - translation : Point
-        +zoom()
-        +translate()
-    }
-  }
-  
-
-    namespace observer {
+   namespace observer {
       interface observer.MyObservable {
           {abstract} + addObserver()
           {abstract} + notifyObservers()
@@ -95,81 +173,110 @@ title __LOG121LAB3's Class Diagram__\n
   
 
   namespace program {
-    class program.Program {
+    class program.Execute {
+        +main()
     }
   }
   
 
   namespace view {
-    class view.ImageMenu {
-    }
-  }
-  
-
-  namespace view {
-    class view.ImagePanel {
-        +paint()
-    }
-  }
-  
-
-  namespace view {
-    class view.ImageWindow {
-    }
-  }
-  
-
-  namespace view {
-    class view.MainPanel {
-        -displayMenu
-    }
-  }
-  
-
-  namespace view {
-    class view.MainWindow {
-    }
-  }
-
-  namespace view {
-      class view.MainMenu {
+      class view.DualPanel {
+          buttonPanel : JPanel
+          imagePanel : ImagePanel
+          dx : int
+          dy : int
+          mousePoint : Point
+          p : Perspective
+          # setImagePerspective()
+          - panelIsDynamic()
+          - panelIsStatic()
       }
-  }
+    }
 
+
+    namespace view {
+      class view.ImagePanel {
+          p : Perspective
+          + paint()
+          + update()
+          # setPerspective()
+      }
+    }
+
+
+    namespace view {
+      class view.MainMenu {
+          + openFile()
+          - addCommandKeyboard()
+          - addMenuCommands()
+          - ajouterMenuAide()
+          - ajouterMenuFichier()
+      }
+    }
+
+
+    namespace view {
+      class view.MainPanel {
+          panelDroite : JPanel
+          panelGauche: DualPanel
+          panel2: DualPanel
+          panel3: DualPanel
+          + update()
+      }
+    }
+
+
+    namespace view {
+      class view.MainWindow {
+          + MainWindow()
+      }
+    }
   
 
+  controller.DeserializeCommand -up-|> controller.IPPCommand
+  controller.IPPCommand -up-|> javax.swing.AbstractAction
+  controller.LoadCommand -up-|> controller.ImageCommand
   controller.PerspectiveCommand -up-|> javax.swing.AbstractAction
+  controller.PerspectiveCommand -up-> modele.Perspective
+  controller.PerspectiveCommand o-- memento.Memento : mementos
+  controller.RedoCommand -up-|> javax.swing.AbstractAction
+  controller.SerializeCommand -up-|> controller.IPPCommand
   controller.TranslateCommand -up-|> controller.PerspectiveCommand
+  controller.TranslateFreeCommand -up-|> controller.TranslateCommand
+  controller.UndoCommand -up-|> javax.swing.AbstractAction
   controller.ZoomCommand -up-|> controller.PerspectiveCommand
+  controller.ZoomInCommand -up-|> controller.ZoomCommand
+  controller.ZoomOutCommand -up-|> controller.ZoomCommand
+  modele.ImagePerspectivePackage .up.|> java.io.Serializable
+  modele.ImagePerspectivePackage .up.|> observer.MyObservable
+  modele.Perspective .up.|> java.io.Serializable
   modele.Perspective .up.|> observer.MyObservable
+  view.DualPanel -up-|> javax.swing.JPanel
+  view.DualPanel -up-> view.ImagePanel : imagePanel
+  view.DualPanel -up-> modele.Perspective
   view.ImagePanel .up.|> observer.MyObserver
-  controller.TranslateCommand -up-> modele.Perspective
-  controller.ZoomCommand -up-> modele.Perspective
-  controller.PerspectiveCommand -up-> controller.CommandManager
+  view.ImagePanel -up-|> javax.swing.JPanel
+  view.ImagePanel -up-> modele.Perspective
+  view.MainMenu -up-|> javax.swing.JMenuBar
+  view.MainPanel .up.|> observer.MyObserver
+  view.MainPanel -up-|> javax.swing.JPanel
+  view.MainPanel o-- view.DualPanel : dualPanels
+  view.MainWindow -up-|> javax.swing.JFrame
+  program.Execute .up.> view.MainWindow
+  view.MainPanel <.up. view.MainWindow
+  view.MainMenu <.up. view.MainWindow
+  controller.RedoCommand .up.> controller.CommandManager
+  controller.UndoCommand .up.> controller.CommandManager
   controller.PerspectiveCommand --o controller.CommandManager
-  view.MainWindow .up.> view.MainPanel
-  view.MainWindow .up.> view.MainMenu
-  view.ImageWindow .up.> view.ImagePanel
-  view.ImageWindow .up.> view.ImageMenu
-  observer.MyObservable o-- observer.MyObserver
-  view.ImagePanel .up.> modele.Perspective
-  view.ImageMenu o-- controller.PerspectiveCommand
-  view.ImagePanel o-- controller.PerspectiveCommand
-  modele.ImageManager --> modele.Perspective
-  view.MainMenu -up-> controller.DeserializeCommand
-  controller.DeserializeCommand -up-> modele.ImageManager
-   controller.DeserializeCommand -up-|> controller.ImageCommand
-   controller.SerializeCommand -up-|> controller.ImageCommand
-   javax.swing.AbstractAction <|-up- controller.ImageCommand
-   controller.SerializeCommand -up-> modele.ImageManager
-    view.MainMenu -up-> controller.SerializeCommand
+  view.DualPanel .up.> controller.PerspectiveCommand
+  view.MainMenu .up.> controller.IPPCommand
+  view.MainMenu .up.> controller.ImageCommand
+  controller.IPPCommand .up.> modele.ImagePerspectivePackage
+  view.ImagePanel .up.> modele.ImagePerspectivePackage
+  modele.Perspective .up.> memento.Memento
 
-  hide program
-  hide javax.swing.JPanel
-  hide javax.swing.JFrame
 
-right footer
-
-endfooter
+hide java.io.Serializable
+hide javax.swing
 
 @enduml

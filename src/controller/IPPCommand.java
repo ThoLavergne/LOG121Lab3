@@ -9,9 +9,9 @@ public abstract class IPPCommand extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        execute();
+        executeAction();
     }
 
-    public abstract void execute();
+    public abstract void executeAction();
 
 }

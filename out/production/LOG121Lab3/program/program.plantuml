@@ -3,7 +3,8 @@
 title __PROGRAM's Class Diagram__\n
 
   namespace program {
-    class program.Program {
+    class program.Execute {
+        + Execute()
         {static} + main()
     }
   }

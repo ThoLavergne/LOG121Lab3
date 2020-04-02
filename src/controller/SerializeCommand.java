@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 public class SerializeCommand extends IPPCommand {
 
     @Override
-    public void execute() {
+    public void executeAction() {
         ImagePerspectivePackage.getInstance().serialize("save.ser");
     }
 }

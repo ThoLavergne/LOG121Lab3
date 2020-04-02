@@ -3,27 +3,62 @@
 title __MODELE's Class Diagram__\n
 
   namespace modele {
-    class modele.ImageManager {
-        {static} - mngr : ImageManager
+    class modele.ImagePerspectivePackage {
+        {static} - NB_PERSPECTIVES : int
+        - image : Image
+        - imageLoaded : boolean
+        {static} - ipp : ImagePerspectivePackage
+        - observers : ArrayList<MyObserver>
+        - pathImage : String
+        - perspectives : ArrayList<Perspective>
+        + addObserver()
+        + deserialize()
+        + getImage()
         {static} + getInstance()
-        - image : ImageIO
-        + loadPerspectives()
-        - ImageManager()
+        + getPathImage()
+        + getPerspective()
+        + getPerspectives()
+        + isImageLoaded()
+        + notifyObservers()
+        + removeObserver()
+        + serialize()
+        + setImage()
+        + setImageLoaded()
+        + setPathImage()
+        + setPerspectives()
+        - ImagePerspectivePackage()
     }
   }
   
 
   namespace modele {
     class modele.Perspective {
-        - tranlation : Point
+        - observers : ArrayList<MyObserver>
+        - translation : Point
         - zoom : double
+        + Perspective()
+        + Perspective()
         + addObserver()
+        + getMemento()
+        + getTranslation()
+        + getX()
+        + getY()
+        + getZoom()
+        + move()
         + notifyObservers()
         + removeObserver()
+        + setMemento()
+        + setTranslation()
+        + setZoom()
+        + zoomIn()
+        + zoomOut()
     }
   }
   
 
+  modele.ImagePerspectivePackage .up.|> java.io.Serializable
+  modele.ImagePerspectivePackage .up.|> observer.MyObservable
+  modele.Perspective .up.|> java.io.Serializable
   modele.Perspective .up.|> observer.MyObservable
 
 

@@ -83,28 +83,24 @@ public class Perspective implements MyObservable, Serializable {
     public void setMemento(Memento mem){
         this.zoom = mem.getZoomMemorized();
         this.translation = (Point) mem.getTranslationMemorized().clone();
-        System.out.println("Memento: \n Zoom: "+zoom );
         notifyObservers();
     }
 
     //Méthodes de zoom
     public void zoomIn(double increment){
         this.zoom += increment;
-        System.out.println("Zoom In: "+ zoom);
         notifyObservers();
 
     }
 
     public void zoomOut(double increment){
         this.zoom -= increment;
-        System.out.println("Zoom Out: "+ zoom);
         notifyObservers();
     }
 
-    //Méthodes de translation
+    //Méthode de translation
     public void move(int x, int y){
         this.translation.translate(x,y);
-        System.out.println("X: "+ translation.x+ "*** Y: "+ translation.y);
         notifyObservers();
     }
 

@@ -1,6 +1,7 @@
 package view;
 
 import modele.ImagePerspectivePackage;
+import observer.MyObserver;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,18 +11,26 @@ import java.awt.*;
 import static view.MainWindow.BUFFER;
 import static view.MainWindow.TAILLE_FENETRE;
 
-public class MainPanel extends JPanel {
+public class MainPanel extends JPanel implements MyObserver {
+
+    DualPanel panelGauche;
+    DualPanel panel2;
+    DualPanel panel3;
+    JPanel panelDroite;
 
     public MainPanel(){
 
         //on recupere le singleton du modele
         ImagePerspectivePackage ipp = ImagePerspectivePackage.getInstance();
 
+        //Ajout de ce panel en observer de l'ImagePerspectivePackage, utilise lors de la deserialization
+        ipp.addObserver(this);
+
         setLayout(new BorderLayout());
-        DualPanel panelGauche = new DualPanel(true, true);
-        JPanel panelDroite = new JPanel();
-        DualPanel panel2 = new DualPanel(true, false);
-        DualPanel panel3 = new DualPanel(false, false);
+        panelGauche = new DualPanel(true, true);
+        panelDroite = new JPanel();
+        panel2 = new DualPanel(true, false);
+        panel3 = new DualPanel(false, false);
 
         panelGauche.setPreferredSize(new Dimension(TAILLE_FENETRE.width/2 - (4*BUFFER), TAILLE_FENETRE.height));
         panelDroite.setPreferredSize(new Dimension(TAILLE_FENETRE.width/2 -(4*BUFFER), TAILLE_FENETRE.height));
@@ -56,4 +65,14 @@ public class MainPanel extends JPanel {
     }
 
 
+    //redefinition des vues lors d'une deserialization
+    @Override
+    public void update() {
+        //on recupere le singleton du modele
+        ImagePerspectivePackage ipp = ImagePerspectivePackage.getInstance();
+
+        panelGauche.setImagePerspective(ipp.getPerspective(0));
+        panel2.setImagePerspective(ipp.getPerspective(1));
+        panel3.setImagePerspective(ipp.getPerspective(2));
+    }
 }

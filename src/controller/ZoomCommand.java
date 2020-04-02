@@ -18,6 +18,4 @@ public abstract class ZoomCommand extends PerspectiveCommand{
     @Override
     public abstract void executeAction();
 
-    @Override
-    public abstract void actionPerformed(ActionEvent e);
 }

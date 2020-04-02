@@ -50,8 +50,6 @@ public class MainMenu extends JMenuBar {
         JMenuItem menuSave = new JMenuItem(MENU_FILE_SAVE);
         JMenuItem menuQuitter = new JMenuItem(MENU_FILE_EXIT);
 
-        ImagePerspectivePackage perspectivePackage = ImagePerspectivePackage.getInstance();
-
         menuChargerImage.addActionListener((ActionEvent e) -> {
             JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             fileChooser.setDialogTitle("Sélectionnez une photo");
@@ -75,33 +73,30 @@ public class MainMenu extends JMenuBar {
                     System.out.println("Appel de la LoadCommand");
                     //Appel de la LoadCommand
                     ImageCommand ic = new LoadCommand();
-                    ic.execute(img, selectedFile.getAbsolutePath());
+                    ic.executeAction(img, selectedFile.getAbsolutePath());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
             firePropertyChange("New Image",null,"New Image");
-//            MainPanel mainPanel = new MainPanel();
-//            System.out.println(this.parent);
-//            this.parent.add(mainPanel);
         });
 
         menuQuitter.addActionListener((ActionEvent e) -> {
             System.exit(0);
         });
 
-        menuChargerFichier.addActionListener((ActionEvent e) ->  {// TODO DeSerialization
+        menuChargerFichier.addActionListener((ActionEvent e) ->  {
           IPPCommand command = new DeserializeCommand();
-          command.execute();
+          command.executeAction();
         });
 
         /**
          * Save actual picture
          */
-        menuSave.addActionListener((ActionEvent e) ->  {// TODO Serialization
+        menuSave.addActionListener((ActionEvent e) ->  {
            IPPCommand command = new SerializeCommand();
-           command.execute();
+           command.executeAction();
         });
 
         menuFichier.add(menuSave);
@@ -111,7 +106,6 @@ public class MainMenu extends JMenuBar {
 
         add(menuFichier);
 
-      // this.getParent().add()
     }
 
     /**

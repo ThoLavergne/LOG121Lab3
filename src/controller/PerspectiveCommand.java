@@ -61,7 +61,14 @@ public abstract class PerspectiveCommand extends AbstractAction {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        executeAction();
+    }
+
+    //Methode qui doit etre definie par les actions concretes
     public abstract void executeAction();
-    public abstract void actionPerformed(ActionEvent e);
+
+
 
 }

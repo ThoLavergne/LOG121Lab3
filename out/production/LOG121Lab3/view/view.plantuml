@@ -3,7 +3,15 @@
 title __VIEW's Class Diagram__\n
 
   namespace view {
-    class view.ImageMenu {
+    class view.DualPanel {
+        buttonPanel : JPanel
+        imagePanel : ImagePanel
+        dx : int
+        dy : int
+        mousePoint : Point
+        # setImagePerspective()
+        - panelIsDynamic()
+        - panelIsStatic()
     }
   }
   
@@ -12,32 +20,52 @@ title __VIEW's Class Diagram__\n
     class view.ImagePanel {
         + paint()
         + update()
+        # setPerspective()
     }
   }
   
 
   namespace view {
-    class view.ImageWindow {
+    class view.MainMenu {
+        + openFile()
+        - addCommandKeyboard()
+        - addMenuCommands()
+        - ajouterMenuAide()
+        - ajouterMenuFichier()
     }
   }
   
 
   namespace view {
     class view.MainPanel {
+        panelDroite : JPanel
+        panelGauche: DualPanel
+        panel2: DualPanel
+        panel3: DualPanel
+        + update()
     }
   }
   
 
   namespace view {
     class view.MainWindow {
+        + MainWindow()
     }
   }
   
 
+  view.DualPanel -up-|> javax.swing.JPanel
+  view.DualPanel o-- view.ImagePanel : imagePanel
+  view.DualPanel o-- modele.Perspective : p
   view.ImagePanel .up.|> observer.MyObserver
   view.ImagePanel -up-|> javax.swing.JPanel
-  view.ImageWindow -up-|> javax.swing.JFrame
+  view.ImagePanel o-- modele.Perspective : p
+  view.MainMenu -up-|> javax.swing.JMenuBar
+  view.MainPanel .up.|> observer.MyObserver
   view.MainPanel -up-|> javax.swing.JPanel
+  view.MainPanel o-- view.DualPanel : panel2
+  view.MainPanel o-- view.DualPanel : panel3
+  view.MainPanel o-- view.DualPanel : panelGauche
   view.MainWindow -up-|> javax.swing.JFrame
 
 

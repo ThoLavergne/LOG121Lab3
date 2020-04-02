@@ -16,9 +16,4 @@ public class TranslateFreeCommand extends TranslateCommand {
     public void executeAction() {
         p.move(x,y);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        p.move(x,y);
-    }
 }

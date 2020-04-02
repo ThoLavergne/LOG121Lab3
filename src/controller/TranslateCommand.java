@@ -17,7 +17,4 @@ public abstract class TranslateCommand extends PerspectiveCommand {
 
     @Override
     public abstract void executeAction();
-
-    @Override
-    public abstract void actionPerformed(ActionEvent e);
 }
