@@ -44,7 +44,7 @@ public class ImagePerspectivePackage implements Serializable, MyObservable {
             out.writeObject(this.getInstance());
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in" + path);
+            System.out.printf("Serialized data is saved in " + path);
         } catch (IOException i) {
             i.printStackTrace();
         }
